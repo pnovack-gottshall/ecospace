@@ -17,3 +17,4 @@ Description: Implements stochastic simulations of community assembly (ecological
 License: CC0
 URL: https://github.com/pnovack-gottshall/ecospace , http://www.ben.edu/faculty/pnovack-gottshall/index.html
 LazyData: TRUE
+BugReports: https://github.com/pnovack-gottshall/ecospace/issues
