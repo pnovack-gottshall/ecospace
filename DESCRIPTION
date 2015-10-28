@@ -12,7 +12,7 @@ Maintainer: Phil Novack-Gottshall <pnovack-gottshall@ben.edu>
 Description: Implements stochastic simulations of community assembly (ecological
     diversification) using customizable ecospace frameworks (functional trait
     spaces). Provides a wrapper to calculate common ecological disparity and
-    functional ecology statistics. Functions are written so they will work in a
+    functional ecology statistical dynamics as a function of species richness. Functions are written so they will work in a
     parallel-computing environment.
 License: CC0
 URL: https://github.com/pnovack-gottshall/ecospace , http://www.ben.edu/faculty/pnovack-gottshall/index.html
