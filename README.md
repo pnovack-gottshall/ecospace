@@ -12,3 +12,5 @@ Novack-Gottshall, P.M. In review at Paleobiology (submitted Oct. 5, 2015). Gener
 Novack-Gottshall, P.M. In review at Paleobiology (submitted Oct. 5, 2015). General models of ecological diversification. II. Simulations and empirical applications.
 
 [![Travis-CI Build Status](https://travis-ci.org/pnovack-gottshall/ecospace.svg?branch=master)](https://travis-ci.org/pnovack-gottshall/ecospace)
+
+This code is authored by Phil Novack-Gottshall and offered under CC0.
