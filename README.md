@@ -8,6 +8,7 @@ The package also contains a sample data set, functional traits for Late Ordovici
 Contact Phil Novack-Gottshall <mailto:pnovack-gottshall@ben.edu> for a pre-print of the following articles in review, which provide more information on the package and its utility.
 
 Novack-Gottshall, P.M. In review at Paleobiology (submitted Oct. 5, 2015). General models of ecological diversification. I. Conceptual synthesis.
+
 Novack-Gottshall, P.M. In review at Paleobiology (submitted Oct. 5, 2015). General models of ecological diversification. II. Simulations and empirical applications.
 
 [![Travis-CI Build Status](https://travis-ci.org/pnovack-gottshall/ecospace.svg?branch=master)](https://travis-ci.org/pnovack-gottshall/ecospace)
