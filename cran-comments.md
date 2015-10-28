@@ -4,7 +4,7 @@
 * ubuntu 12.04 (on travis-ci), R 3.2.2 (64-bit)
 
 ## R CMD check results
-There were no ERRORs or WARNINGs. 
+There were no ERRORs or WARNINGs.
 
 ## Reposited on GitHub as 'ecospace'.
 
