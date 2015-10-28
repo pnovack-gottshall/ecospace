@@ -5,7 +5,7 @@ ecospace is an R package that implements stochastic simulations of community ass
 
 The package also contains a sample data set, functional traits for Late Ordovician (Type Cincinnatian) fossil species from the Kope and Waynesville formations.
 
-Contact Phil Novack-Gottshall <mailto:pnovack-gottshall@ben.edu> for a pre-print of the following articles in review, which provide more information on the package and its utility.
+Contact Phil Novack-Gottshall (<mailto:pnovack-gottshall@ben.edu>) for a pre-print of the following articles in review, which provide more information on the package and its utility.
 
 Novack-Gottshall, P.M. In review at Paleobiology (submitted Oct. 5, 2015). General models of ecological diversification. I. Conceptual synthesis.
 
