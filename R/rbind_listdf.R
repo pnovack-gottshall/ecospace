@@ -70,7 +70,7 @@
 #' ecospace <- create_ecospace(nchar=15, char.state=rep(3, 15), char.type=rep("numeric", 15))
 #'
 #' # Build 25 samples for neutral model:
-#' nreps <- 1:30
+#' nreps <- 1:25
 #' n.samples <- lapply(X=nreps, FUN=neutral, Sseed=3, Smax=10, ecospace)
 #'
 #' # Calculate functional diversity metrics for simulated samples
@@ -81,7 +81,7 @@
 #' # rbind lists together into a single dataframe
 #' all <- rbind_listdf(n.metrics)
 #'
-#' # Calculate mean dynamics (not reliable given only 10 replicates)
+#' # Calculate mean dynamics
 #' means <- n.metrics[[1]]
 #' for(n in 1:10) means[n,4:11] <- apply(all[which(all$S==means$S[n]),4:11], 2, mean, na.rm=TRUE)
 #' means
