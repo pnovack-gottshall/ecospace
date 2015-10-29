@@ -7,7 +7,6 @@ Depends: R (>= 3.1.0)
 Imports: FD (>= 1.0-12)
 Authors@R: person("Phil", "Novack-Gottshall", email = "pnovack-gottshall@ben.edu",
   role = c("aut", "cre"))
-Author: Phil Novack-Gottshall
 Maintainer: Phil Novack-Gottshall <pnovack-gottshall@ben.edu>
 Description: Implements stochastic simulations of community assembly (ecological
     diversification) using customizable ecospace frameworks (functional trait
