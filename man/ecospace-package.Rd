@@ -10,7 +10,7 @@ Ecospace Frameworks}
 ecospace is an R package that implements stochastic simulations of community
 assembly (ecological diversification) using customizable ecospace frameworks
 (functional trait spaces). Simulations model the 'neutral', 'redundancy',
-'partitioning", and "expansion" models of Bush and Novack-Gottshall(2012). It
+'partitioning", and "expansion" models of Bush and Novack-Gottshall (2012). It
 provides a wrapper to calculate common ecological disparity and functional
 ecology statistical dynamics as a function of species richness. Functions are
 written so they will work in a parallel-computing environment.
