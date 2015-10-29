@@ -1,0 +1,9 @@
+^.*\.Rproj$
+^\.Rproj\.user$
+^\.travis\.yml$
+^cran-comments\.md$
+^revdep$
+^README\.md$
+^Submitting to CRAN\.txt$
+^NEWS\.md$
+
