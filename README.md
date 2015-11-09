@@ -17,4 +17,4 @@ Novack-Gottshall, P.M. In review at Paleobiology (submitted Oct. 5, 2015). Gener
 
 The most recent commit is currently: [![Travis-CI Build Status](https://travis-ci.org/pnovack-gottshall/ecospace.svg?branch=master)](https://travis-ci.org/pnovack-gottshall/ecospace) (Travis CI)
 
-This package is authored by Phil Novack-Gottshall <mailto:pnovack-gottshall@ben.edu> and offered under CC0.
+This package is authored by Phil Novack-Gottshall (<mailto:pnovack-gottshall@ben.edu>) and offered under CC0.
