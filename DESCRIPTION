@@ -1,19 +1,24 @@
 Package: ecospace
 Type: Package
-Title: Simulating Community Assembly and Ecological Diversification Using Ecospace Frameworks
+Title: Simulating Community Assembly and Ecological Diversification Using
+    Ecospace Frameworks
 Version: 1.0.1
 Date: 2015-10-29
-Depends: R (>= 3.1.0)
-Imports: FD (>= 1.0-12)
+Depends:
+    R (>= 3.1.0)
+Imports:
+    FD (>= 1.0-12)
 Authors@R: person("Phil", "Novack-Gottshall", email = "pnovack-gottshall@ben.edu",
-  role = c("aut", "cre"))
+     role = c("aut", "cre"))
 Maintainer: Phil Novack-Gottshall <pnovack-gottshall@ben.edu>
 Description: Implements stochastic simulations of community assembly (ecological
     diversification) using customizable ecospace frameworks (functional trait
     spaces). Provides a wrapper to calculate common ecological disparity and
-    functional ecology statistical dynamics as a function of species richness. Functions are written so they will work in a
-    parallel-computing environment.
+    functional ecology statistical dynamics as a function of species richness.
+    Functions are written so they will work in a parallel-computing environment.
 License: CC0
-URL: https://github.com/pnovack-gottshall/ecospace , http://www.ben.edu/faculty/pnovack-gottshall/index.html
+URL: https://github.com/pnovack-gottshall/ecospace,
+    http://www.ben.edu/faculty/pnovack-gottshall/index.html
 LazyData: TRUE
 BugReports: https://github.com/pnovack-gottshall/ecospace/issues
+RoxygenNote: 5.0.0

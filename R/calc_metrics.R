@@ -108,7 +108,7 @@
 #'   data occur. Other integers greater than 1 can also be specified. See the
 #'   help file for \code{FD::\link[FD]{dbFD}} for additional information.
 #'
-#'   Lingoes correction \code{corr='lingoes'},as recommended by Legendre and
+#'   Lingoes correction \code{corr='lingoes'}, as recommended by Legendre and
 #'   Anderson (1999), is called when the species-by-species distance matrix
 #'   cannot be represented in a Euclidean space. See the help file for
 #'   \code{FD::\link[FD]{dbFD}} for additional information.
