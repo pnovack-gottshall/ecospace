@@ -1,5 +1,4 @@
-## ecospace R Package for Simulating Community Assembly and Ecological 
-Diversification Using Ecospace Frameworks
+## ecospace: R Package for Simulating Community Assembly and Ecological Diversification Using Ecospace Frameworks
 
 ecospace is an R package that implements stochastic simulations of community 
 assembly (ecological diversification) using customizable ecospace frameworks 
@@ -30,18 +29,22 @@ Or downloaded directly in R using:
 library(devtools)   # Install 'devtools' package if not already done 
 devtools::install_github("pnovack-gottshall/ecospace") library(ecospace)
 
-## References Bush, A. and P.M. Novack-Gottshall. 2012. Modelling the 
-ecological-functional diversification of marine Metazoa on geological time 
-scales. Biology Letters 8: 151-155.
+## References
 
-The following pdf pre-prints, which were accepted for publication in 
-Paleobiology, provide more information on the package and its utility.
+Bush, A. and P.M. Novack-Gottshall. 2012. Modelling the ecological-functional
+diversification of marine Metazoa on geological time scales. Biology Letters 8:
+151-155.
+
+The following manuscripts were accepted for publication in Paleobiology, provide
+more information on the package and its utility. Pre-prints are available on 
+GitHub as pdfs; click the "Raw" button (near top-right) to download as a pdf 
+file.
 
 Novack-Gottshall, P.M. 2016 (accepted Dec 15, 2015). General models of 
 ecological diversification. I. Conceptual synthesis. Paleobiology.
 
-Novack-Gottshall, P.M. 2016 (accepted Dec 15, 2015). General models of
-ecological diversification. II. Simulations and empirical applications.
+Novack-Gottshall, P.M. 2016 (accepted Dec 15, 2015). General models of 
+ecological diversification. II. Simulations and empirical applications. 
 Paleobiology.
 
 The most recent commit is currently: [![Travis-CI Build 
