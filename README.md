@@ -3,10 +3,11 @@
 ecospace is an R package that implements stochastic simulations of community 
 assembly (ecological diversification) using customizable ecospace frameworks 
 (functional trait spaces). Simulations model the 'neutral', 'redundancy', 
-'partitioning", and "expansion" models of Bush and Novack-Gottshall (2012). The 
-package provides a wrapper to calculate common ecological disparity and 
-functional ecology statistical dynamics as a function of species richness. 
-Functions are written so they will work in a parallel-computing environment.
+'partitioning', and 'expansion' models of Bush and Novack-Gottshall (2012) and
+Novack-Gottshall (2016). The package provides a wrapper to calculate common
+ecological disparity and functional ecology statistical dynamics as a function
+of species richness. Functions are written so they will work in a
+parallel-computing environment.
 
 The package also contains a sample data set, functional traits for Late 
 Ordovician (Type Cincinnatian) fossil species from the Kope and Waynesville 
@@ -26,16 +27,17 @@ https://github.com/pnovack-gottshall/ecospace
 
 Or downloaded directly in R using:
 
-library(devtools)   # Install 'devtools' package if not already done 
-devtools::install_github("pnovack-gottshall/ecospace") library(ecospace)
+library(devtools)
+devtools::install_github("pnovack-gottshall/ecospace")
+library(ecospace)
 
 ## References
 
-Bush, A. and P.M. Novack-Gottshall. 2012. Modelling the ecological-functional
-diversification of marine Metazoa on geological time scales. Biology Letters 8:
+Bush, A. and P.M. Novack-Gottshall. 2012. Modelling the ecological-functional 
+diversification of marine Metazoa on geological time scales. Biology Letters 8: 
 151-155.
 
-The following manuscripts were accepted for publication in Paleobiology, provide
+The following manuscripts were accepted for publication in Paleobiology and provide
 more information on the package and its utility. Pre-prints are available on 
 GitHub as pdfs; click the "Raw" button (near top-right) to download as a pdf 
 file.
