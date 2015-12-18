@@ -19,7 +19,7 @@ http://cran.r-project.org/web/packages/ecospace
 
 You can install the most recent public release version in R using:
 
-	install.packages("paleotree")
+	install.packages("ecospace")
 
 The latest pre-release version can be found at GitHub:
 
