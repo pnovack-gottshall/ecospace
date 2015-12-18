@@ -19,17 +19,17 @@ http://cran.r-project.org/web/packages/ecospace
 
 You can install the most recent public release version in R using:
 
-install.packages("ecospace")
+  install.packages("ecospace")
 
 The latest pre-release version can be found at GitHub:
 
-https://github.com/pnovack-gottshall/ecospace
+  https://github.com/pnovack-gottshall/ecospace
 
 Or downloaded directly in R using:
 
-library(devtools)
-devtools::install_github("pnovack-gottshall/ecospace")
-library(ecospace)
+  library(devtools)
+  devtools::install_github("pnovack-gottshall/ecospace")
+  library(ecospace)
 
 ## References
 
