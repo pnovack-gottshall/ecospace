@@ -4,7 +4,7 @@ ecospace is an R package that implements stochastic simulations of community
 assembly (ecological diversification) using customizable ecospace frameworks 
 (functional trait spaces). Simulations model the 'neutral', 'redundancy', 
 'partitioning', and 'expansion' models of Bush and Novack-Gottshall (2012) and
-Novack-Gottshall (2016). The package provides a wrapper to calculate common
+Novack-Gottshall (2016a, b). The package provides a wrapper to calculate common
 ecological disparity and functional ecology statistical dynamics as a function
 of species richness. Functions are written so they will work in a
 parallel-computing environment.
@@ -42,10 +42,10 @@ more information on the package and its utility. Pre-prints are available on
 GitHub as pdfs; click the "Raw" button (near top-right) to download as a pdf 
 file.
 
-Novack-Gottshall, P.M. 2016 (accepted Dec 15, 2015). General models of 
+Novack-Gottshall, P.M. 2016a (accepted Dec 15, 2015). General models of 
 ecological diversification. I. Conceptual synthesis. Paleobiology.
 
-Novack-Gottshall, P.M. 2016 (accepted Dec 15, 2015). General models of 
+Novack-Gottshall, P.M. 2016b (accepted Dec 15, 2015). General models of 
 ecological diversification. II. Simulations and empirical applications. 
 Paleobiology.
 
