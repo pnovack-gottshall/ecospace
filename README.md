@@ -41,7 +41,7 @@ diversification of marine Metazoa on geological time scales. Biology Letters 8:
 The following manuscripts were accepted for publication in Paleobiology and provide
 more information on the package and its utility. Pre-prints are available on 
 GitHub as pdfs; click the "Raw" button (near top-right) to download as a pdf 
-file.
+file. They are also available at https://www.researchgate.net/profile/Philip_Novack-Gottshall/contributions.
 
 Novack-Gottshall, P.M. 2016a (accepted Dec 15, 2015). General models of 
 ecological diversification. I. Conceptual synthesis. Paleobiology.
