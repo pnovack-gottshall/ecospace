@@ -16,7 +16,7 @@
 #'   See Novack-Gottshall (2007: especially online Supplementary Appendix A at
 #'   \url{www.ben.edu/faculty/pnovack-gottshall/2007_Novack-Gottshall_Ecospace.pdf})
 #'    for definition each functional trait, justifications, explanations, and
-#'   examples. Novack-Gottshall (2007: Supplementary Appendix B; In press:
+#'   examples. Novack-Gottshall (2007: Supplementary Appendix B; 2016:
 #'   Supplementary Appendix A) provides examples of how traits were coded using
 #'   inferences derived from functional morphology, body size, ichnology,
 #'   \emph{in situ} preservation, biotic associations recording direct
@@ -78,9 +78,9 @@
 #'   incorporeal physical condition} \item{PART}{Food consumed as particulate
 #'   matter} \item{BULK}{Food consumed as bulk matter}}
 #'
-#' @source Novack-Gottshall, P.M. In review at \emph{Paleobiology}, submitted
-#'   Oct. 5, 2015. General models of ecological diversification. II. Simulations
-#'   and empirical applications.
+#' @source Novack-Gottshall, P.M. 2016b. General models of ecological
+#'   diversification. II. Simulations and empirical applications.
+#'   \emph{Paleobiology} 42: 209-239.
 #'
 #' @references Novack-Gottshall, P.M. 2007. Using a theoretical ecospace to
 #'   quantify the ecological diversity of Paleozoic and modern marine biotas.
@@ -88,9 +88,9 @@
 #' @references Novack-Gottshall, P.M. 2008. Using simple body-size metrics to
 #'   estimate fossil body volume: empirical validation using diverse Paleozoic
 #'   invertebrates. \emph{PALAIOS} 23(3):163-173.
-#' @references Novack-Gottshall, P.M. In review at \emph{Paleobiology},
-#'   submitted Oct. 5, 2015. General models of ecological diversification. II.
-#'   Simulations and empirical applications.
+#' @references Novack-Gottshall, P.M. 2016. General models of ecological
+#'   diversification. II. Simulations and empirical applications.
+#'   \emph{Paleobiology} 42: 209-239.
 #' @references Villeger, S., P. M. Novack-Gottshall, and D. Mouillot. 2011. The
 #'   multidimensionality of the niche reveals functional diversity changes in
 #'   benthic marine biotas across geological time. \emph{Ecology Letters}

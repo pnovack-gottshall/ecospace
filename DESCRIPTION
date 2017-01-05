@@ -2,10 +2,10 @@ Package: ecospace
 Type: Package
 Title: Simulating Community Assembly and Ecological Diversification Using
     Ecospace Frameworks
-Version: 1.0.1
+Version: 1.1.1
 Date: 2015-10-29
 Depends:
-    R (>= 3.1.0)
+    R (>= 3.2.2)
 Imports:
     FD (>= 1.0-12)
 Authors@R: person("Phil", "Novack-Gottshall", email = "pnovack-gottshall@ben.edu",
