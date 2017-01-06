@@ -38,10 +38,7 @@ Bush, A. and P.M. Novack-Gottshall. 2012. Modelling the ecological-functional
 diversification of marine Metazoa on geological time scales. Biology Letters 8: 
 151-155.
 
-The following manuscripts were accepted for publication in Paleobiology and provide
-more information on the package and its utility. Pre-prints are available on 
-GitHub as pdfs; click the "Raw" button (near top-right) to download as a pdf 
-file. They are also available at https://www.researchgate.net/profile/Philip_Novack-Gottshall/contributions.
+Reprints are available at https://www.researchgate.net/profile/Philip_Novack-Gottshall/contributions.
 
 Novack-Gottshall, P.M. 2016a. General models of ecological diversification. 
 I. Conceptual synthesis. Paleobiology 42: 185-208.
