@@ -21,4 +21,4 @@ URL: https://github.com/pnovack-gottshall/ecospace,
     http://www.ben.edu/faculty/pnovack-gottshall/index.html
 LazyData: TRUE
 BugReports: https://github.com/pnovack-gottshall/ecospace/issues
-RoxygenNote: 5.0.0
+RoxygenNote: 5.0.1

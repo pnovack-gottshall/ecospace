@@ -81,7 +81,7 @@ The primary goal of this function is to describe the statistical
   supplied samples are ecologically or evolutionary cohesive assemblages in
   which there is a logical order to the rows (such that the sixth row is the
   sixth species added to the assemblage) and that such incremental
-  calculations are sensible. See Novack-Gottshall (In pressA, B) for
+  calculations are sensible. See Novack-Gottshall (2016a,b) for
   additional context. Samples must have species as rows and traits as columns
   (of many allowed character types), and have \code{class(data.frame)} or a
   list of such data frames, with each data frame a separate sample.
@@ -90,7 +90,7 @@ The primary goal of this function is to describe the statistical
   studies (adapted from studies of morphological disparity) and four used in
   functional diversity studies. See Foote (1993), Ciampaglio et al. (2001),
   and Wills (2001) for definitions and details on morphological disparity
-  measures and Novack-Gottshall (2007; In press A,B) for implementation as
+  measures and Novack-Gottshall (2007; 2016a,b) for implementation as
   measures of ecological disparity. See Mason et al. (2005), Anderson et al.
   (2006), Villeger et al. (2008), Laliberte and Legendre (2010), Mouchet et
   al. (2010), Mouillot et al. (2013) for definitions and details on
@@ -243,13 +243,12 @@ Novack-Gottshall, P.M. 2007. Using a theoretical ecospace to
   quantify the ecological diversity of Paleozoic and modern marine biotas.
   \emph{Paleobiology} 33: 274-295.
 
-Novack-Gottshall, P.M. In review at \emph{Paleobiology},
-  submitted Oct. 5, 2015. General models of ecological diversification. I.
-  Conceptual synthesis.
+Novack-Gottshall, P.M. 2016a. General models of ecological
+  diversification. I. Conceptual synthesis. \emph{Paleobiology} 42: 185-208.
 
-Novack-Gottshall, P.M. In review at \emph{Paleobiology},
-  submitted Oct. 5, 2015. General models of ecological diversification. II.
-  Simulations and empirical applications.
+Novack-Gottshall, P.M. 2016b. General models of ecological
+  diversification. II. Simulations and empirical applications.
+  \emph{Paleobiology} 42: 209-239.
 
 Villeger, S., N. W. H. Mason, and D. Mouillot. 2008. New
   multidimensional functional diversity indices for a multifaceted framework

@@ -202,10 +202,10 @@ seq <- seq(nchar)
 prod(sapply(seq, function(seq) length(ecospace[[seq]]$allowed.combos)))
 # 252 possible life habits
 
-# Novack-Gottshall (2007) ecospace framework, updated in Novack-Gottshall (2015)
+# Novack-Gottshall (2007) ecospace framework, updated in Novack-Gottshall (2016b)
 #   Fossil species pool from Late Ordovician (Type Cincinnatian) Kope and
 #   Waynesville Formations, with functional-trait characters coded according
-#   to Novack-Gottshall (2007, 2015)
+#   to Novack-Gottshall (2007, 2016b)
 data(KWTraits)
 head(KWTraits)
 nchar <- 18
@@ -273,12 +273,11 @@ Novack-Gottshall, P.M. 2007. Using a theoretical ecospace to
   quantify the ecological diversity of Paleozoic and modern marine biotas.
   \emph{Paleobiology} 33: 274-295.
 
-Novack-Gottshall, P.M. In review at \emph{Paleobiology},
-  submitted Oct. 5, 2015. General models of ecological diversification. I.
-  Conceptual synthesis.
+Novack-Gottshall, P.M. 2016a. General models of ecological
+  diversification. I. Conceptual synthesis. \emph{Paleobiology} 42: 185-208.
 
-Novack-Gottshall, P.M. In review at \emph{Paleobiology},
-  submitted Oct. 5, 2015. General models of ecological diversification. II.
-  Simulations and empirical applications.
+Novack-Gottshall, P.M. 2016b. General models of ecological
+  diversification. II. Simulations and empirical applications.
+  \emph{Paleobiology} 42: 209-239.
 }
 

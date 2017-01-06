@@ -83,7 +83,7 @@ Simulations are implemented as Monte Carlo processes in which
 
   Expansion rules tend to produce ecospaces that progressively expand into
   more novel regions. Additional details on the expansion simulation are
-  provided in Novack-Gottshall (In pressA, B), including sensitivity to
+  provided in Novack-Gottshall (2016a,b), including sensitivity to
   ecospace framework (functional trait space) structure, recommendations for
   model selection, and basis in ecological and evolutionary theory.
 }
@@ -150,13 +150,12 @@ Bush, A. and P.M. Novack-Gottshall. 2012. Modelling the
   ecological-functional diversification of marine Metazoa on geological time
   scales. \emph{Biology Letters} 8: 151-155.
 
-Novack-Gottshall, P.M. In review at \emph{Paleobiology},
-  submitted Oct. 5, 2015. General models of ecological diversification. I.
-  Conceptual synthesis.
+Novack-Gottshall, P.M. 2016a. General models of ecological
+  diversification. I. Conceptual synthesis. \emph{Paleobiology} 42: 185-208.
 
-Novack-Gottshall, P.M. In review at \emph{Paleobiology},
-  submitted Oct. 5, 2015. General models of ecological diversification. II.
-  Simulations and empirical applications.
+Novack-Gottshall, P.M. 2016b. General models of ecological
+  diversification. II. Simulations and empirical applications.
+  \emph{Paleobiology} 42: 209-239.
 }
 \seealso{
 \code{\link{create_ecospace}}, \code{\link{neutral}},
