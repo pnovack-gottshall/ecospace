@@ -43,12 +43,11 @@ more information on the package and its utility. Pre-prints are available on
 GitHub as pdfs; click the "Raw" button (near top-right) to download as a pdf 
 file. They are also available at https://www.researchgate.net/profile/Philip_Novack-Gottshall/contributions.
 
-Novack-Gottshall, P.M. 2016a (accepted Dec 15, 2015). General models of 
-ecological diversification. I. Conceptual synthesis. Paleobiology.
+Novack-Gottshall, P.M. 2016a. General models of ecological diversification. 
+I. Conceptual synthesis. Paleobiology 42: 185-208.
 
-Novack-Gottshall, P.M. 2016b (accepted Dec 15, 2015). General models of 
-ecological diversification. II. Simulations and empirical applications. 
-Paleobiology.
+Novack-Gottshall, P.M. 2016b. General models of ecological diversification. 
+II. Simulations and empirical applications. Paleobiology 42: 209-239.
 
 The most recent commit is currently: [![Travis-CI Build 
 Status](https://travis-ci.org/pnovack-gottshall/ecospace.svg?branch=master)](https://travis-ci.org/pnovack-gottshall/ecospace)
