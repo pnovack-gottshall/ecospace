@@ -33,9 +33,10 @@
 #' depends, so it is loaded simultaneously.
 #'
 #' @examples
-#' # Get the package version and citation of ecospace
+#' # Get package version, citation, and updates
 #' packageVersion("ecospace")
 #' citation("ecospace")
+#' news(package="ecospace")
 #'
 #' # Create an ecospace framework (functional-trait space) with 15 characters
 #' #    (functional traits) of mixed types
