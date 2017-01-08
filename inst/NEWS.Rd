@@ -2,8 +2,9 @@
 \title{ecospace News}
 \encoding{UTF-8}
 
-\section{Changes in version 1.1.2 (2017-01-08)}{
+\section{Changes in version 1.1.3 (2017-01-08)}{
   \itemize{
+    \item First draft of Vignette
     \item Improved NEWS documentation
   }
 }
