@@ -34,17 +34,17 @@ Or downloaded directly in R using:
 
 ## References
 
-Bush, A. and P.M. Novack-Gottshall. 2012. Modelling the ecological-functional 
-diversification of marine Metazoa on geological time scales. Biology Letters 8: 
-151-155.
-
-Reprints are available at https://www.researchgate.net/profile/Philip_Novack-Gottshall/contributions.
-
 Novack-Gottshall, P.M. 2016a. General models of ecological diversification. 
 I. Conceptual synthesis. Paleobiology 42: 185-208.
 
 Novack-Gottshall, P.M. 2016b. General models of ecological diversification. 
 II. Simulations and empirical applications. Paleobiology 42: 209-239.
+
+Bush, A. and P.M. Novack-Gottshall. 2012. Modelling the ecological-functional 
+diversification of marine Metazoa on geological time scales. Biology Letters 8: 
+151-155.
+
+Reprints are available at https://www.researchgate.net/profile/Philip_Novack-Gottshall/contributions.
 
 The most recent commit is currently: [![Travis-CI Build 
 Status](https://travis-ci.org/pnovack-gottshall/ecospace.svg?branch=master)](https://travis-ci.org/pnovack-gottshall/ecospace)
