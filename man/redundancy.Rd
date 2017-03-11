@@ -113,9 +113,6 @@ samples <- lapply(X=nreps, FUN=redundancy, Sseed=5, Smax=50, ecospace)
 str(samples)
 
 }
-\author{
-Phil Novack-Gottshall \email{pnovack-gottshall@ben.edu}
-}
 \references{
 Bush, A. and P.M. Novack-Gottshall. 2012. Modelling the
   ecological-functional diversification of marine Metazoa on geological time
@@ -132,4 +129,6 @@ Novack-Gottshall, P.M. 2016b. General models of ecological
 \code{\link{create_ecospace}}, \code{\link{neutral}},
   \code{\link{partitioning}}, \code{\link{expansion}}
 }
-
+\author{
+Phil Novack-Gottshall \email{pnovack-gottshall@ben.edu}
+}

@@ -36,4 +36,3 @@ When dealing with ecospace frameworks with multistate binary (numeric)
 \seealso{
 \code{\link[base]{unique}}
 }
-

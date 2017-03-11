@@ -124,4 +124,3 @@ par(op)
   \code{\link{partitioning}}, \code{\link{expansion}}, and
   \code{\link{calc_metrics}}
 }
-

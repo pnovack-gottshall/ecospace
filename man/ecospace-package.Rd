@@ -2,8 +2,8 @@
 % Please edit documentation in R/ecospace.R
 \docType{package}
 \name{ecospace-package}
-\alias{ecospace}
 \alias{ecospace-package}
+\alias{ecospace}
 \title{ecospace: Simulating Community Assembly and Ecological Diversification Using
 Ecospace Frameworks}
 \description{
@@ -62,9 +62,6 @@ plot(S, FDis, type="l", cex=.5)
 par(op)
 
 }
-\author{
-Phil Novack-Gottshall \email{pnovack-gottshall@ben.edu}
-}
 \references{
 Bush, A. and P.M. Novack-Gottshall. 2012. Modelling the
   ecological-functional diversification of marine Metazoa on geological time
@@ -82,4 +79,6 @@ The 'calc_metrics' function relies extensively on the functional
 diversity package \code{\link[FD]{FD}}, and hence lists this package as a
 depends, so it is loaded simultaneously.
 }
-
+\author{
+Phil Novack-Gottshall \email{pnovack-gottshall@ben.edu}
+}

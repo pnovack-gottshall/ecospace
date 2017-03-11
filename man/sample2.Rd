@@ -21,4 +21,3 @@ function proposed in help file of \code{sample} as \code{resample}.
 \seealso{
 \code{\link[base]{sample}}
 }
-

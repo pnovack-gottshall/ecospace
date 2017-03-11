@@ -30,4 +30,3 @@ Pre-allocate the basic data frame structure so classes (and factor
 \code{\link{create_ecospace}} for how to create an ecospace
   framework (functional trait space).
 }
-

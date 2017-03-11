@@ -237,9 +237,6 @@ prod(sapply(seq, function(seq) length(ecospace[[seq]]$allowed.combos)))
 # ~3.6 trillion life habits
 
 }
-\author{
-Phil Novack-Gottshall \email{pnovack-gottshall@ben.edu}
-}
 \references{
 Bambach, R. K. 1983. Ecospace utilization and guilds in marine
   communities through the Phanerozoic. Pp. 719-746. \emph{In} M. J. S.
@@ -280,4 +277,6 @@ Novack-Gottshall, P.M. 2016b. General models of ecological
   diversification. II. Simulations and empirical applications.
   \emph{Paleobiology} 42: 209-239.
 }
-
+\author{
+Phil Novack-Gottshall \email{pnovack-gottshall@ben.edu}
+}

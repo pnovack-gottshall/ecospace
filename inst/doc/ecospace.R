@@ -83,10 +83,22 @@ all <- metaMDS(gowdis(nmds.data), zerodist="add", k=2, trymax=10)
 
 plot(all$points[,1], all$points[,2], col=c(rep("red", Sseed), rep("orange", nrow(neu)), rep("red", nrow(red)), rep("blue", nrow(par)), rep("purple", nrow(exp))), pch=c(rep(19, Sseed), rep(21, nrow(neu)), rep(22, nrow(red)), rep(23, nrow(par)), rep(24, nrow(exp))), main=paste("Combined models,\n", Smax, "species per model"), xlab="Axis 1", ylab="Axis 2", cex=2, cex.lab=1.5, lwd=1)
 
+leg.txt <- c("seed", "neutral", "redundancy", "partitioning", "expansion")
+leg.col <- c("red", "orange", "red", "blue", "purple")
+leg.pch <- c(19, 21, 22, 23, 24)
+legend("topright", inset=.02, legend=leg.txt, pch=leg.pch, col=leg.col, cex=.75)
+
+
 ## ------------------------------------------------------------------------
-# Using Smax=10 here to illustrate calculation for first 25 species in neutral assemblage
+# Calculate statistics for just the entire sample
 options(warn = -1)
-metrics <- calc_metrics(samples=neutral_sample, Smax=10, Model="Neutral")
+metrics <- calc_metrics(samples=neutral_sample, increm=FALSE)
+metrics
+
+## ------------------------------------------------------------------------
+# Using Smax=10 here to illustrate calculation for first 10 species in neutral assemblage
+options(warn = -1)
+metrics <- calc_metrics(samples=neutral_sample, Smax=10, Model="Neutral", increm=TRUE)
 metrics
 
 ## ---- fig.width = 5, fig.height=5----------------------------------------

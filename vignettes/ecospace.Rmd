@@ -1,212 +1,235 @@
---- title: "ecospace: Simulating Community Assembly and Ecological
-Diversification Using Ecospace Frameworks" author: "Phil Novack-Gottshall" date:
-"`r Sys.Date()`" output: rmarkdown::html_vignette vignette: > 
-%\VignetteIndexEntry{ecospace} %\VignetteEngine{knitr::rmarkdown} 
-%\VignetteEncoding{UTF-8} ---
+---
+title: "ecospace: Simulating Community Assembly and Ecological Diversification Using Ecospace Frameworks"
+author: "Phil Novack-Gottshall"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{ecospace}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
 
-ecospace is an R package that implements stochastic simulations of community
-assembly (ecological diversification) using customizable ecospace frameworks
-(functional trait spaces). Simulations model the 'neutral', 'redundancy',
-'partitioning', and 'expansion' models of Bush and Novack-Gottshall (2012) and
-Novack-Gottshall (2016a,b). It provides a wrapper to calculate common ecological
-disparity and functional ecology statistical dynamics as a function of species
-richness. Functions are written so they will work in a parallel-computing
-environment.
+ecospace is an R package that implements stochastic simulations of community assembly (ecological diversification) using customizable ecospace frameworks (functional trait spaces). Simulations model the 'neutral', 'redundancy', 'partitioning', and 'expansion' models of Bush and Novack-Gottshall (2012) and Novack-Gottshall (2016a,b). It provides a wrapper to calculate common ecological disparity and functional ecology statistical dynamics as a function of species richness. Functions are written so they will work in a parallel-computing environment.
 
-The package also contains a sample data set, functional traits for Late
-Ordovician (Type Cincinnatian) fossil species from the Kope and Waynesville
-formations, from Novack-Gottshall (2016b).
+The package also contains a sample data set, functional traits for Late Ordovician (Type Cincinnatian) fossil species from the Kope and Waynesville formations, from Novack-Gottshall (2016b).
 
-### References Bush, A. and P.M. Novack-Gottshall. 2012. Modelling the
-ecological-functional diversification of marine Metazoa on geological time
-scales. *Biology Letters* 8: 151-155.
+### References
+Bush, A. and P.M. Novack-Gottshall. 2012. Modelling the ecological-functional diversification of marine Metazoa on geological time scales. *Biology Letters* 8: 151-155.
 
-Novack-Gottshall, P.M. 2016a. General models of ecological diversification. I.
-Conceptual synthesis. *Paleobiology* 42: 185-208.
+Novack-Gottshall, P.M. 2016a. General models of ecological diversification. I. Conceptual synthesis. *Paleobiology* 42: 185-208.
 
-Novack-Gottshall, P.M. 2016b. General models of ecological diversification. II.
-Simulations and empirical applications. *Paleobiology* 42: 209-239.
+Novack-Gottshall, P.M. 2016b. General models of ecological diversification. II. Simulations and empirical applications. *Paleobiology* 42: 209-239.
 
 
 ---------
 
 ## Create an ecospace framework (functional trait space)
 
-All functions start by creating an ecospace framework. Here, we use one with 9
-characters: 3 as factors, 3 as ordered factors, and 3 as ordered numeric types.
-The framework is fully customizable, allowing users to use most character types,
-define unique character and state names, and constrain possible states (either
-by a set number of 'multiple presences' or by weighting the state according to a
-species pool).
+Start by creating an ecospace framework with 9 characters: 3 as factors, 3 as ordered factors, and 3 as ordered numeric types. The framework is fully customizable, allowing users to use most character types, define unique character and state names, and constrain possible states (either by a set number of 'multiple presences' or by weighting the state according to a species pool).
 
-```{r} library(ecospace) nchar <- 9 ecospace <- create_ecospace(nchar=nchar,
-char.state=rep(3, nchar), char.type=rep(c("factor", "ord.fac", "ord.num"), nchar
-/ 3)) ```
+```{r}
+library(ecospace)
+nchar <- 9
+ecospace <- create_ecospace(nchar=nchar, char.state=rep(3, nchar),
+  char.type=rep(c("factor", "ord.fac", "ord.num"), nchar / 3))
+```
 
 
 ---------
 
-## Use ecospace framework to simulate a 50-species assemblage using the
-'neutral' rule
+## Use ecospace framework to simulate a 50-species assemblage using the 'neutral' rule
 
-In the 'neutral' model, all species have states chosen at random from the
-ecospace framework. ```{r} Smax <- 50 set.seed(314) neutral_sample <-
-neutral(Sseed=5, Smax=Smax, ecospace=ecospace) head(neutral_sample, 10) ```
+In the 'neutral' model, all species have states chosen at random from the ecospace framework. 
+```{r}
+Smax <- 50
+set.seed(314)
+neutral_sample <- neutral(Sseed=5, Smax=Smax, ecospace=ecospace)
+head(neutral_sample, 10)
+```
 
-## Compare with assemblages built using the 'redundancy', 'partitioning', and
-'expansion' rules
+## Compare with assemblages built using the 'redundancy', 'partitioning', and 'expansion' rules
 
 ### Redundancy rules
 
-The redundancy rules add species with traits redundant to those previously
-added. We will start the simulation by 'seeding' the assemblage with 5 species
-at random (before the rule starts).
+The redundancy rules add species with traits redundant to those previously added. We will start the simulation by 'seeding' the assemblage with 5 species at random (before the rule starts). 
 
-```{r} set.seed(314) Sseed=5 redund_sample <- redundancy(Sseed=Sseed, Smax=Smax,
-ecospace=ecospace) ```
+```{r}
+set.seed(314)
+Sseed=5
+redund_sample <- redundancy(Sseed=Sseed, Smax=Smax, ecospace=ecospace)
+```
 
-Note that the number of functionally unique species will not change after the
-simulation begins in the default rule. Although there are 50 species, there are
-only 5 functionally unique entities. ```{r} unique(redund_sample) ```
+Note that the number of functionally unique species will not change after the simulation begins in the default rule. Although there are 50 species, there are only 5 functionally unique entities.
+```{r}
+unique(redund_sample)
+```
 
 
-Relax the rule so that new species are on average 95% functionally identical to
-pre-existing ones: ```{r} set.seed(314) redund_sample2 <-
-redundancy(Sseed=Sseed, Smax=Smax, ecospace=ecospace, strength=0.95) ```
+Relax the rule so that new species are on average 95% functionally identical to pre-existing ones:
+```{r}
+set.seed(314)
+redund_sample2 <- redundancy(Sseed=Sseed, Smax=Smax, ecospace=ecospace, strength=0.95)
+```
 
-Plot both 'redundancy' assemblages (using PCA with Gower dissimilarity), showing
-order of assembly. Seed species in red, next 5 in black, remainder in gray.
-Notice the redundancy models produce an ecospace with discrete clusters of life
-habits. ```{r, fig.width = 5, fig.height=5} library(FD, quietly=TRUE) pc <-
-prcomp(FD::gowdis(redund_sample)) plot(pc$x, type="n", main=paste("Redundancy
-model,\n", Smax, "species")) text(pc$x[,1], pc$x[,2], labels=seq(Smax),
-col=c(rep("red", Sseed), rep("black", 5), rep("slategray", (Smax - Sseed - 5))),
-pch=c(rep(19, Sseed), rep(21, (Smax - Sseed))), cex=.8)
+Plot both 'redundancy' assemblages (using PCA with Gower dissimilarity), showing order of assembly. Seed species in red, next 5 in black, remainder in gray. Notice the redundancy models produce an ecospace with discrete clusters of life habits.
+```{r, fig.width = 5, fig.height=5}
+library(FD, quietly=TRUE)
+pc <- prcomp(FD::gowdis(redund_sample))
+plot(pc$x, type="n", main=paste("Redundancy model,\n", Smax, "species"))
+text(pc$x[,1], pc$x[,2], labels=seq(Smax), col=c(rep("red", Sseed), rep("black", 5),
+  rep("slategray", (Smax - Sseed - 5))), pch=c(rep(19, Sseed), rep(21, (Smax - Sseed))),
+  cex=.8)
 
-pc.r <- prcomp(FD::gowdis(redund_sample2)) plot(pc.r$x, type="n",
-main=paste("Redundancy model (95% identical),\n", Smax, "species")) 
-text(pc.r$x[,1], pc.r$x[,2], labels=seq(Smax), col=c(rep("red", Sseed),
-rep("black", 5), rep("slategray", (Smax - Sseed - 5))), pch=c(rep(19, Sseed),
-rep(21, (Smax - Sseed))), cex=.8) ```
-
+pc.r <- prcomp(FD::gowdis(redund_sample2))
+plot(pc.r$x, type="n", main=paste("Redundancy model (95% identical),\n", Smax, "species"))
+text(pc.r$x[,1], pc.r$x[,2], labels=seq(Smax), col=c(rep("red", Sseed), rep("black", 5),
+  rep("slategray", (Smax - Sseed - 5))), pch=c(rep(19, Sseed), rep(21, (Smax - Sseed))),
+  cex=.8)
+```
+  
 
 ### Partitioning rules
 
-The partitioning rules add species with traits intermediate to those previously
-added. We will start the simulation by 'seeding' the assemblage with 5 species
-at random (before the rule starts).
+The partitioning rules add species with traits intermediate to those previously added. We will start the simulation by 'seeding' the assemblage with 5 species at random (before the rule starts). 
 
-The rules can be implemented in a "strict" (the default) version: ```{r} 
-set.seed(314) Sseed=5 partS_sample <- partitioning(Sseed=Sseed, Smax=Smax,
-ecospace=ecospace) ```
+The rules can be implemented in a "strict" (the default) version:
+```{r}
+set.seed(314)
+Sseed=5
+partS_sample <- partitioning(Sseed=Sseed, Smax=Smax, ecospace=ecospace)
+```
 
-Or in a "relaxed" version: ```{r} set.seed(314) Sseed=5 partR_sample <-
-partitioning(Sseed=Sseed, Smax=Smax, ecospace=ecospace, rule="relaxed") ```
+Or in a "relaxed" version:
+```{r}
+set.seed(314)
+Sseed=5
+partR_sample <- partitioning(Sseed=Sseed, Smax=Smax, ecospace=ecospace, rule="relaxed")
+```
 
-Plot both 'partitioning' assemblages, showing order of assembly. Notice both
-partitioning models produce gradients, with the 'strict' version having linear
-gradients and the 'relaxed' version filling the centroid. ```{r, fig.width = 5,
-fig.height=5} pc.ps <- prcomp(FD::gowdis(partS_sample)) plot(pc.ps$x, type="n",
-main=paste("'Strict' partitioning model,\n", Smax, "species")) text(pc.ps$x[,1],
-pc$x[,2], labels=seq(Smax), col=c(rep("red", Sseed), rep("black", 5), 
-rep("slategray", (Smax - Sseed - 5))), pch=c(rep(19, Sseed), rep(21, (Smax -
-Sseed))), cex=.8)
+Plot both 'partitioning' assemblages, showing order of assembly. Notice both partitioning models produce gradients, with the 'strict' version having linear gradients and the 'relaxed' version filling the centroid.
+```{r, fig.width = 5, fig.height=5}
+pc.ps <- prcomp(FD::gowdis(partS_sample))
+plot(pc.ps$x, type="n", main=paste("'Strict' partitioning model,\n", Smax, "species"))
+text(pc.ps$x[,1], pc$x[,2], labels=seq(Smax), col=c(rep("red", Sseed), rep("black", 5),
+  rep("slategray", (Smax - Sseed - 5))), pch=c(rep(19, Sseed), rep(21, (Smax - Sseed))),
+  cex=.8)
 
-pc.pr <- prcomp(FD::gowdis(partR_sample)) plot(pc.pr$x, type="n",
-main=paste("'Relaxed' partitioning model,\n", Smax, "species")) 
-text(pc.pr$x[,1], pc.pr$x[,2], labels=seq(Smax), col=c(rep("red", Sseed),
-rep("black", 5), rep("slategray", (Smax - Sseed - 5))), pch=c(rep(19, Sseed),
-rep(21, (Smax - Sseed))), cex=.8) ```
+pc.pr <- prcomp(FD::gowdis(partR_sample))
+plot(pc.pr$x, type="n", main=paste("'Relaxed' partitioning model,\n", Smax, "species"))
+text(pc.pr$x[,1], pc.pr$x[,2], labels=seq(Smax), col=c(rep("red", Sseed), rep("black", 5),
+  rep("slategray", (Smax - Sseed - 5))), pch=c(rep(19, Sseed), rep(21, (Smax - Sseed))),
+  cex=.8)
+```
 
 
 
 
 ### Expansion rules
 
-The expansion rules add species with traits maximally different from those
-previously added. We will start the simulation by 'seeding' the assemblage with
-5 species at random (before the rule starts).
+The expansion rules add species with traits maximally different from those previously added. We will start the simulation by 'seeding' the assemblage with 5 species at random (before the rule starts). 
 
-```{r} set.seed(314) Sseed=5 exp_sample <- expansion(Sseed=Sseed, Smax=Smax,
-ecospace=ecospace) ```
+```{r}
+set.seed(314)
+Sseed=5
+exp_sample <- expansion(Sseed=Sseed, Smax=Smax, ecospace=ecospace)
+```
 
-Plot the assemblage, showing order of assembly. Notice how later species
-consistently expand the ecospace, exploring previously unexplored parts of the
-exospace. ```{r, fig.width = 5, fig.height=5} pc.e <-
-prcomp(FD::gowdis(exp_sample)) plot(pc.e$x, type="n", main=paste("Expansion
-model,\n", Smax, "species")) text(pc.e$x[,1], pc$x[,2], labels=seq(Smax),
-col=c(rep("red", Sseed), rep("black", 5), rep("slategray", (Smax - Sseed - 5))),
-pch=c(rep(19, Sseed), rep(21, (Smax - Sseed))), cex=.8) ```
+Plot the assemblage, showing order of assembly. Notice how later species consistently expand the ecospace, exploring previously unexplored parts of the exospace.
+```{r, fig.width = 5, fig.height=5}
+pc.e <- prcomp(FD::gowdis(exp_sample))
+plot(pc.e$x, type="n", main=paste("Expansion model,\n", Smax, "species"))
+text(pc.e$x[,1], pc$x[,2], labels=seq(Smax), col=c(rep("red", Sseed), rep("black", 5),
+  rep("slategray", (Smax - Sseed - 5))), pch=c(rep(19, Sseed), rep(21, (Smax - Sseed))),
+  cex=.8)
+```
 
 
-### Visually comparing four rules It is instructive to compare the four models
-graphically. This is possible here because set.seed() was used when running each
-simulation, so they all share the same starting configurations. Plotting using
-vegan:metaMDS in two dimensions for improved visualization of simulation
-dynamics.
+### Visually comparing four rules
+It is instructive to compare the four models graphically. This is possible here because set.seed() was used when running each simulation, so they all share the same starting configurations. Plotting using vegan:metaMDS in two dimensions for improved visualization of simulation dynamics.
 
-```{r, fig.width = 5, fig.height=5} library(vegan, quietly=TRUE) start <-
-neutral_sample[1:Sseed,] neu <- neutral_sample[(Sseed + 1):Smax,] red <-
-redund_sample2[(Sseed + 1):Smax,] par <- partR_sample[(Sseed + 1):Smax,] exp <-
-exp_sample[(Sseed + 1):Smax,] nmds.data <- rbind(start, neu, red, par, exp) all
-<- metaMDS(gowdis(nmds.data), zerodist="add", k=2, trymax=10)
+```{r, fig.width = 5, fig.height=5}
+library(vegan, quietly=TRUE)
+start <- neutral_sample[1:Sseed,]
+neu <- neutral_sample[(Sseed + 1):Smax,]
+red <- redund_sample2[(Sseed + 1):Smax,]
+par <- partR_sample[(Sseed + 1):Smax,]
+exp <- exp_sample[(Sseed + 1):Smax,]
+nmds.data <- rbind(start, neu, red, par, exp)
+all <- metaMDS(gowdis(nmds.data), zerodist="add", k=2, trymax=10)
 
-plot(all$points[,1], all$points[,2], col=c(rep("red", Sseed), rep("orange",
-nrow(neu)), rep("red", nrow(red)), rep("blue", nrow(par)), rep("purple",
-nrow(exp))), pch=c(rep(19, Sseed), rep(21, nrow(neu)), rep(22, nrow(red)),
-rep(23, nrow(par)), rep(24, nrow(exp))), main=paste("Combined models,\n", Smax,
-"species per model"), xlab="Axis 1", ylab="Axis 2", cex=2, cex.lab=1.5, lwd=1) 
+plot(all$points[,1], all$points[,2], col=c(rep("red", Sseed), rep("orange", nrow(neu)), rep("red", nrow(red)), rep("blue", nrow(par)), rep("purple", nrow(exp))), pch=c(rep(19, Sseed), rep(21, nrow(neu)), rep(22, nrow(red)), rep(23, nrow(par)), rep(24, nrow(exp))), main=paste("Combined models,\n", Smax, "species per model"), xlab="Axis 1", ylab="Axis 2", cex=2, cex.lab=1.5, lwd=1)
+
+leg.txt <- c("seed", "neutral", "redundancy", "partitioning", "expansion")
+leg.col <- c("red", "orange", "red", "blue", "purple")
+leg.pch <- c(19, 21, 22, 23, 24)
+legend("topright", inset=.02, legend=leg.txt, pch=leg.pch, col=leg.col, cex=.75)
+
 ```
 
 ---------
 
 ## Calculate ecological disparity (functional diversity) metrics
 
-The package wraps around dbFD() in package FD to calculate common ecological
-disparity and functional diversity statistics. Statistics are calculated
-incrementally so dynamics can be understood as a function of species richness.
-See ?calc_metrics for explanation of each statistic.
+The package wraps around dbFD() in package FD to calculate common ecological disparity and functional diversity statistics. Statistics are calculated incrementally so dynamics can be understood as a function of species richness. See ?calc_metrics for explanation of each statistic.
 
-(Note: warnings are turned off in this vignette, caused by attempting to
-calculate the total variance (V) on factor characters.)
+(Note: warnings are turned off in this vignette, caused by attempting to calculate the total variance (V) on factor characters.)
 
-```{r} # Using Smax=10 here to illustrate calculation for first 10 species in
-neutral assemblage options(warn = -1) metrics <-
-calc_metrics(samples=neutral_sample, Smax=10, Model="Neutral") metrics ```
+Several users have requested changes to calc_metrics() to allow simple statistical calculation for the entire sample (instead of doing so incrementally). Starting with version 1.2.1, the argument increm=FALSE allows this functionality.
+
+```{r}
+# Calculate statistics for just the entire sample
+options(warn = -1)
+metrics <- calc_metrics(samples=neutral_sample, increm=FALSE)
+metrics
+```
+
+The more typical use of calc_metrics() is to calculate statistics incrementally (which is the default behavior).
+
+```{r}
+# Using Smax=10 here to illustrate calculation for first 10 species in neutral assemblage
+options(warn = -1)
+metrics <- calc_metrics(samples=neutral_sample, Smax=10, Model="Neutral", increm=TRUE)
+metrics
+```
 
 
-The functions are written so they can be run 'in parallel'. Although not run
-here, the following provides an example of how this can be implemented using
-lapply(), here building 25 'neutral' samples of 20 species each and then
-calculating disparity metrics on each.
+The functions are written so they can be run 'in parallel'. Although not run here, the following provides an example of how this can be implemented using lapply(), here building 25 'neutral' samples of 20 species each and then calculating disparity metrics on each.
 
 Note the code will take a few seconds to run to completion.
 
-```{r, fig.width = 5, fig.height=5} nreps <- 1:25 # A sequence of the samples to
-be simulated n.samples <- lapply(X=nreps, FUN=neutral, Sseed=3, Smax=20,
-ecospace)
+```{r, fig.width = 5, fig.height=5}
+nreps <- 1:25 # A sequence of the samples to be simulated
+n.samples <- lapply(X=nreps, FUN=neutral, Sseed=3, Smax=20, ecospace)
 
-# Calculate functional diversity metrics for simulated samples n.metrics <-
-lapply(X=nreps, FUN=calc_metrics, samples=n.samples, Model="neutral",
-Param="NA")
+# Calculate functional diversity metrics for simulated samples
+n.metrics <- lapply(X=nreps, FUN=calc_metrics, samples=n.samples, Model="neutral", Param="NA")
 
-# Combine lists together into a single dataframe (the function is new to this
-package) all <- rbind_listdf(n.metrics)
+# Combine lists together into a single dataframe (the function is new to this package)
+all <- rbind_listdf(n.metrics)
 
-# Calculate mean dynamics across simulations means <- n.metrics[[1]] for(n in
-1:20) means[n,4:11] <- apply(all[which(all$S==means$S[n]),4:11], 2, mean,
-na.rm=TRUE)
+# Calculate mean dynamics across simulations
+means <- n.metrics[[1]]
+for(n in 1:20) means[n,4:11] <- apply(all[which(all$S==means$S[n]),4:11], 2, mean, na.rm=TRUE)
 
-# Plot statistics as function of species richness, overlaying mean dynamics 
-par(mfrow=c(2,4), mar=c(4, 4, 1, .3)) attach(all)
+# Plot statistics as function of species richness, overlaying mean dynamics
+par(mfrow=c(2,4), mar=c(4, 4, 1, .3))
+attach(all)
 
-plot(S, H, type="p", cex=.75, col="gray") lines(means$S, means$H, type="l",
-lwd=2) plot(S, D, type="p", cex=.75, col="gray") lines(means$S, means$D,
-type="l", lwd=2) plot(S, M, type="p", cex=.75, col="gray") lines(means$S,
-means$M, type="l", lwd=2) plot(S, V, type="p", cex=.75, col="gray") 
-lines(means$S, means$V, type="l", lwd=2) plot(S, FRic, type="p", cex=.75,
-col="gray") lines(means$S, means$FRic, type="l", lwd=2) plot(S, FEve, type="p",
-cex=.75, col="gray") lines(means$S, means$FEve, type="l", lwd=2) plot(S, FDiv,
-type="p", cex=.75, col="gray") lines(means$S, means$FDiv, type="l", lwd=2) 
-plot(S, FDis, type="p", cex=.75, col="gray") lines(means$S, means$FDis,
-type="l", lwd=2) ```
+plot(S, H, type="p", cex=.75, col="gray")
+lines(means$S, means$H, type="l", lwd=2)
+plot(S, D, type="p", cex=.75, col="gray")
+lines(means$S, means$D, type="l", lwd=2)
+plot(S, M, type="p", cex=.75, col="gray")
+lines(means$S, means$M, type="l", lwd=2)
+plot(S, V, type="p", cex=.75, col="gray")
+lines(means$S, means$V, type="l", lwd=2)
+plot(S, FRic, type="p", cex=.75, col="gray")
+lines(means$S, means$FRic, type="l", lwd=2)
+plot(S, FEve, type="p", cex=.75, col="gray")
+lines(means$S, means$FEve, type="l", lwd=2)
+plot(S, FDiv, type="p", cex=.75, col="gray")
+lines(means$S, means$FDiv, type="l", lwd=2)
+plot(S, FDis, type="p", cex=.75, col="gray")
+lines(means$S, means$FDis, type="l", lwd=2)
+```
+
