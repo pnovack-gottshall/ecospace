@@ -2,6 +2,12 @@
 \title{ecospace News}
 \encoding{UTF-8}
 
+\section{Changes in version 1.1.5 (2017-03-11)}{
+  \itemize{
+    \item Text updates to Vignette
+  }
+}
+
 \section{Changes in version 1.1.4 (2017-02-20)}{
   \itemize{
     \item Text updates to Vignette
