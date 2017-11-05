@@ -174,7 +174,16 @@ The package wraps around dbFD() in package FD to calculate common ecological dis
 
 (Note: warnings are turned off in this vignette, caused by attempting to calculate the total variance (V) on factor characters.)
 
+<<<<<<< HEAD
 Several users have requested changes to calc_metrics() to allow simple statistical calculation for the entire sample (instead of doing so incrementally). Starting with version 1.2.1, the argument increm=FALSE allows this functionality.
+=======
+```{r}
+# Using Smax=10 here to illustrate calculation for first 25 species in neutral assemblage
+options(warn = -1)
+metrics <- calc_metrics(samples=neutral_sample, Smax=10, Model="Neutral")
+metrics
+```
+>>>>>>> fb78539b6ef6e9b01df7470cc5e3d0445d767e2c
 
 ```{r}
 # Calculate statistics for just the entire sample
@@ -183,6 +192,7 @@ metrics <- calc_metrics(samples=neutral_sample, increm=FALSE)
 metrics
 ```
 
+<<<<<<< HEAD
 The more typical use of calc_metrics() is to calculate statistics incrementally (which is the default behavior).
 
 ```{r}
@@ -193,6 +203,8 @@ metrics
 ```
 
 
+=======
+>>>>>>> fb78539b6ef6e9b01df7470cc5e3d0445d767e2c
 The functions are written so they can be run 'in parallel'. Although not run here, the following provides an example of how this can be implemented using lapply(), here building 25 'neutral' samples of 20 species each and then calculating disparity metrics on each.
 
 Note the code will take a few seconds to run to completion.
