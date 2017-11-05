@@ -90,6 +90,12 @@ legend("topright", inset=.02, legend=leg.txt, pch=leg.pch, col=leg.col, cex=.75)
 
 
 ## ------------------------------------------------------------------------
+# Using Smax=10 here to illustrate calculation for first 25 species in neutral assemblage
+options(warn = -1)
+metrics <- calc_metrics(samples=neutral_sample, Smax=10, Model="Neutral")
+metrics
+
+## ------------------------------------------------------------------------
 # Calculate statistics for just the entire sample
 options(warn = -1)
 metrics <- calc_metrics(samples=neutral_sample, increm=FALSE)
