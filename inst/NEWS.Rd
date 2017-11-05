@@ -2,7 +2,6 @@
 \title{ecospace News}
 \encoding{UTF-8}
 
-<<<<<<< HEAD
 \section{Changes in version 1.2.1 (2017-11-05)}{
   \itemize{
     \item Addition of 'increm' argument to calc_metrics() for those wishing to only calculate statistics on the entire sample (instead of incrementally). (Thanks to Craig McClain, Felipe Opazo, Stewart Edie, and Katie Collins for the recommendation.)
@@ -11,8 +10,6 @@
   }
 }
 
-=======
->>>>>>> fb78539b6ef6e9b01df7470cc5e3d0445d767e2c
 \section{Changes in version 1.1.5 (2017-03-11)}{
   \itemize{
     \item Text updates to Vignette
