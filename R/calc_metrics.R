@@ -290,7 +290,7 @@ calc_metrics <- function(nreps=1, samples=NA, Smax=NA, Model="", Param="", m=3, 
       if(!is.null(FD$FDiv)) sam.out$FDiv[s] <- FD$FDiv else sam.out$FDiv[s] <- NA
       sam.out$FDiv[s] <- FD$FDiv
     }
-  if(!increm) sam.out <- sam.out[s, ]
   }
+  if(!increm) sam.out <- sam.out[s, ]
   return(sam.out)
 }

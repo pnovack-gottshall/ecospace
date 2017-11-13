@@ -2,6 +2,12 @@
 \title{ecospace News}
 \encoding{UTF-8}
 
+\section{Changes in version 1.2.2 (2017-11-13)}{
+  \itemize{
+    \item Moved (outside the loop) returned value when 'increm'=TRUE for improved handling of unusual data sets.
+  }
+}
+
 \section{Changes in version 1.2.1 (2017-11-05)}{
   \itemize{
     \item Addition of 'increm' argument to calc_metrics() for those wishing to only calculate statistics on the entire sample (instead of incrementally). (Thanks to Craig McClain, Felipe Opazo, Stewart Edie, and Katie Collins for the recommendation.)
