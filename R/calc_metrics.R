@@ -251,6 +251,7 @@
 #' identical(tail(metrics, 1), metrics2) # These are identical
 #'
 #'
+#' \dontrun{
 #' # Can take a few minutes to run to completion
 #' # Calculate for 5 samples
 #' nreps <- 1:5
@@ -258,6 +259,7 @@
 #' metrics <- lapply(X=nreps, FUN=calc_metrics, samples=samples, Model="Neutral", Param="NA")
 #' alarm()
 #' str(metrics)
+#' }
 #'@export
 calc_metrics <- function(nreps=1, samples=NA, Smax=NA, Model="", Param="", m=3, corr="lingoes", method="Euclidean", increm = TRUE) {
   if(is.logical(samples)) stop("you must provide a list of samples to calculate\n")

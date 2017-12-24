@@ -5,6 +5,7 @@
 \section{Changes in version 1.2.3 (2017-12-24)}{
   \itemize{
     \item Change working directory reset so no longer permanently changes wd to temp dir.
+    \item Faster examples.
   }
 }
 

@@ -210,6 +210,7 @@ metrics2
 identical(tail(metrics, 1), metrics2) # These are identical
 
 
+\dontrun{
 # Can take a few minutes to run to completion
 # Calculate for 5 samples
 nreps <- 1:5
@@ -217,6 +218,7 @@ samples <- lapply(X=nreps, FUN=neutral, Sseed=5, Smax=50, ecospace)
 metrics <- lapply(X=nreps, FUN=calc_metrics, samples=samples, Model="Neutral", Param="NA")
 alarm()
 str(metrics)
+}
 }
 \references{
 Anderson, M. J., K. E. Ellingsen, and B. H. McArdle. 2006.
