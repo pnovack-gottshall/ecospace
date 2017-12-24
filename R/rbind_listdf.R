@@ -41,30 +41,10 @@
 #' lists <- vector("list", length=nl)
 #' for(i in 1:nl) lists[[i]] <- list(x = rnorm(100), y = rnorm(100))
 #' str(lists)
-#' object.size(lists)     # ~ 2 MB
+#' object.size(lists)     # ~ 2.0 MB
 #' all <- rbind_listdf(lists)
 #' str(all)
-#' object.size(all)       # ~ 7 MB
-#'
-#' # Note each of following can take a few seconds to run
-#' # Compare timings:
-#' t0 <- Sys.time()
-#' all <- rbind_listdf(lists)
-#' (Sys.time() - t0)
-#'
-#' t0 <- Sys.time()
-#' all <- rbind_listdf(lists, seq.by=50)
-#' (Sys.time() - t0)
-#'
-#' t0 <- Sys.time()
-#' all <- rbind_listdf(lists, seq.by=500)
-#' (Sys.time() - t0)
-#'
-#' # Compare to non-function version
-#' all2 <- data.frame()
-#' t0 <- Sys.time()
-#' for(i in 1:nl) all2 <- rbind(all2, lists[[i]])
-#' (Sys.time() - t0)
+#' object.size(all)       # ~ 1.6 MB
 #'
 #' # Build blank ecospace framework to use in simulations
 #' ecospace <- create_ecospace(nchar=15, char.state=rep(3, 15), char.type=rep("numeric", 15))
@@ -109,6 +89,28 @@
 #' lines(means$S, means$FDis, type="l", lwd=2)
 #'
 #' par(op)
+#'
+#' \dontrun{
+#' # Note each of following can take a few seconds to run
+#' # Compare timings:
+#' t0 <- Sys.time()
+#' all <- rbind_listdf(lists)
+#' (Sys.time() - t0)
+#'
+#' t0 <- Sys.time()
+#' all <- rbind_listdf(lists, seq.by=20)
+#' (Sys.time() - t0)
+#'
+#' t0 <- Sys.time()
+#' all <- rbind_listdf(lists, seq.by=500)
+#' (Sys.time() - t0)
+#'
+#' # Compare to non-function version
+#' all2 <- data.frame()
+#' t0 <- Sys.time()
+#' for(i in 1:nl) all2 <- rbind(all2, lists[[i]])
+#' (Sys.time() - t0)
+#' }
 #'
 #' @export
 rbind_listdf <- function(lists=NULL, seq.by=100) {
