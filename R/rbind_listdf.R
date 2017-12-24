@@ -49,8 +49,8 @@
 #' # Build blank ecospace framework to use in simulations
 #' ecospace <- create_ecospace(nchar=15, char.state=rep(3, 15), char.type=rep("numeric", 15))
 #'
-#' # Build 25 samples for neutral model:
-#' nreps <- 1:25
+#' # Build 20 samples for neutral model:
+#' nreps <- 1:20
 #' n.samples <- lapply(X=nreps, FUN=neutral, Sseed=3, Smax=10, ecospace)
 #'
 #' # Calculate functional diversity metrics for simulated samples
