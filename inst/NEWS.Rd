@@ -2,6 +2,12 @@
 \title{ecospace News}
 \encoding{UTF-8}
 
+\section{Changes in version 1.2.3 (2017-12-24)}{
+  \itemize{
+    \item Change working directory reset so no longer permanently changes wd to temp dir.
+  }
+}
+
 \section{Changes in version 1.2.2 (2017-11-13)}{
   \itemize{
     \item Moved (outside the loop) returned value when 'increm'=TRUE for improved handling of unusual data sets.

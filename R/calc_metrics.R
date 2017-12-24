@@ -268,7 +268,8 @@ calc_metrics <- function(nreps=1, samples=NA, Smax=NA, Model="", Param="", m=3, 
   if(!is.numeric(Smax)) ns <- nrow(sample) else ns <- Smax
   if(increm) Smin <- 1 else Smin <- ns
   if(method != "Euclidean" | any(sapply(sample, data.class) == "factor") | any(sapply(sample, data.class) == "ordered")) method <- "Gower"
-  setwd(tempdir())     # Specify the pre-built (and CPU-process unique) temp directory for storage of vert.txt temp files for convex hull calculations
+  odir <- setwd(tempdir())     # Specify the pre-built (and CPU-process unique) temp directory for storage of vert.txt temp files for convex hull calculations
+  on.exit(setwd(odir))
   sam.out <- data.frame(Model=Model, Param=Param, S=numeric(ns), H=numeric(ns), D=numeric(ns), M=numeric(ns), V=numeric(ns), FRic=numeric(ns), FEve=numeric(ns), FDiv=numeric(ns), FDis=numeric(ns), qual.FRic=numeric(ns))
   for (s in Smin:ns) {
     sam <- sample[1:s,]
