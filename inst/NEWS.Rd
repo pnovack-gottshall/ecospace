@@ -2,7 +2,7 @@
 \title{ecospace News}
 \encoding{UTF-8}
 
-\section{Changes in version 1.2.3 (2017-12-24)}{
+\section{Changes in version 1.2.3 (2018-02-17)}{
   \itemize{
     \item Change working directory reset so no longer permanently changes wd to temp dir.
     \item Faster examples.

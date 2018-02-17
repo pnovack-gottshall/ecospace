@@ -57,9 +57,10 @@ object.size(all)       # ~ 1.6 MB
 # Build blank ecospace framework to use in simulations
 ecospace <- create_ecospace(nchar=15, char.state=rep(3, 15), char.type=rep("numeric", 15))
 
-# Build 20 samples for neutral model:
-nreps <- 1:20
-n.samples <- lapply(X=nreps, FUN=neutral, Sseed=3, Smax=10, ecospace)
+# Build 5 samples for neutral model:
+nreps <- 1:5
+Smax <- 10
+n.samples <- lapply(X=nreps, FUN=neutral, Sseed=3, Smax=Smax, ecospace)
 
 # Calculate functional diversity metrics for simulated samples
 n.metrics <- lapply(X=nreps, FUN=calc_metrics, samples=n.samples, Model="neutral", Param="NA")
@@ -71,7 +72,7 @@ all <- rbind_listdf(n.metrics)
 
 # Calculate mean dynamics
 means <- n.metrics[[1]]
-for(n in 1:10) means[n,4:11] <- apply(all[which(all$S==means$S[n]),4:11], 2, mean, na.rm=TRUE)
+for(n in 1:Smax) means[n,4:11] <- apply(all[which(all$S==means$S[n]),4:11], 2, mean, na.rm=TRUE)
 means
 
 # Plot statistics as function of species richness, overlaying mean dynamics
