@@ -57,10 +57,16 @@ object.size(all)       # ~ 1.6 MB
 # Build blank ecospace framework to use in simulations
 ecospace <- create_ecospace(nchar=15, char.state=rep(3, 15), char.type=rep("numeric", 15))
 
+<<<<<<< HEAD
 # Build 5 samples for neutral model:
 nreps <- 1:5
 Smax <- 10
 n.samples <- lapply(X=nreps, FUN=neutral, Sseed=3, Smax=Smax, ecospace)
+=======
+# Build 15 samples for neutral model:
+nreps <- 1:15
+n.samples <- lapply(X=nreps, FUN=neutral, Sseed=3, Smax=10, ecospace)
+>>>>>>> 8153d476970f11d41f50e0a3c58673b554c37e75
 
 # Calculate functional diversity metrics for simulated samples
 n.metrics <- lapply(X=nreps, FUN=calc_metrics, samples=n.samples, Model="neutral", Param="NA")
