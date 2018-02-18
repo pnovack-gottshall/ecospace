@@ -5,7 +5,7 @@ Title: Simulating Community Assembly and Ecological Diversification Using
 Version: 1.2.3
 Date: 2018-01-17
 Depends:
-    R (>= 3.4.3)
+    R (>= 3.4.0)
 Imports:
     FD (>= 1.0-12)
 Authors@R: person("Phil", "Novack-Gottshall", email = "pnovack-gottshall@ben.edu",
