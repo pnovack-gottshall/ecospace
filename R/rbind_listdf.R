@@ -54,11 +54,11 @@
 #' nreps <- 1:5
 #' Smax <- 10
 #' n.samples <- lapply(X=nreps, FUN=neutral, Sseed=3, Smax=Smax, ecospace)
-=======
-#' # Build 15 samples for neutral model:
-#' nreps <- 1:15
-#' n.samples <- lapply(X=nreps, FUN=neutral, Sseed=3, Smax=10, ecospace)
->>>>>>> 8153d476970f11d41f50e0a3c58673b554c37e75
+#'
+#' # Build 10 samples for neutral model:
+#' nreps <- 1:10
+#' Smax <- 10
+#' n.samples <- lapply(X=nreps, FUN=neutral, Sseed=3, Smax=Smax, ecospace)
 #'
 #' # Calculate functional diversity metrics for simulated samples
 #' n.metrics <- lapply(X=nreps, FUN=calc_metrics, samples=n.samples, Model="neutral", Param="NA")
