@@ -49,11 +49,6 @@
 #' # Build blank ecospace framework to use in simulations
 #' ecospace <- create_ecospace(nchar=15, char.state=rep(3, 15), char.type=rep("numeric", 15))
 #'
-#' # Build 5 samples for neutral model:
-#' nreps <- 1:5
-#' Smax <- 10
-#' n.samples <- lapply(X=nreps, FUN=neutral, Sseed=3, Smax=Smax, ecospace)
-#'
 #' # Build 10 samples for neutral model:
 #' nreps <- 1:10
 #' Smax <- 10
