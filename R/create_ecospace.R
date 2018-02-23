@@ -253,14 +253,22 @@
 #'
 #' @export
 create_ecospace <- function(nchar, char.state, char.type, char.names=NA, state.names=NA, constraint=Inf, weight.file=NA) {
-  if(is.finite(constraint) & (constraint < 1 | (abs(constraint - round(constraint)) > .Machine$double.eps))) stop("'constraint' must be a positive integer (or Inf)\n")
-  if(is.logical(char.names)) char.names <- paste(rep("char", nchar), seq.int(nchar), sep="")
-  ncs <- replace(char.state, which(char.type=="ord.num"), 1)
-  if(is.logical(state.names)) state.names <- paste(rep("state", sum(ncs)), seq.int(sum(ncs)), sep="")
-  if(sum(ncs) != length(state.names)) stop("state names is a different length than number of state names specified.\n")
+  if (is.finite(constraint) &
+      (constraint < 1 |
+       (abs(constraint - round(constraint)) > .Machine$double.eps)))
+    stop("'constraint' must be a positive integer (or Inf)\n")
+  if (is.logical(char.names))
+    char.names <- paste(rep("char", nchar), seq.int(nchar), sep = "")
+  ncs <- replace(char.state, which(char.type == "ord.num"), 1)
+  if (is.logical(state.names))
+    state.names <-
+    paste(rep("state", sum(ncs)), seq.int(sum(ncs)), sep = "")
+  if (sum(ncs) != length(state.names))
+    stop("state names is a different length than number of state names specified.\n")
   lcn <- length(char.names)
   lct <- length(char.type)
-  if(nchar != lcn | nchar != lct | lcn != lct) stop("character names and/or types a different length than number of characters specified.\n")
+  if (nchar != lcn | nchar != lct | lcn != lct)
+    stop("character names and/or types a different length than number of characters specified.\n")
   wf <- weight.file
   wt <- 1
   out <- vector("list", nchar + 1)
@@ -268,88 +276,114 @@ create_ecospace <- function(nchar, char.state, char.type, char.names=NA, state.n
   for (ch in seq_len(nchar)) {
     out[[ch]]$char <- char.names[ch]
     out[[ch]]$type <- char.type[ch]
-    if(char.type[ch]=="numeric") {
-      traits <- seq(from=wf.tally, length=char.state[ch])
+    if (char.type[ch] == "numeric") {
+      traits <- seq(from = wf.tally, length = char.state[ch])
       seq <- seq_len(char.state[ch])
-      grid <- do.call(expand.grid, lapply(seq, function (seq) 0:1))
-      grid <- grid[order(apply(grid, 1, sum)),]
+      grid <- do.call(expand.grid, lapply(seq, function (seq)
+        0:1))
+      grid <- grid[order(apply(grid, 1, sum)), ]
       # Delete character combinations that are "all absences" or disallowed by constraint
       sums <- apply(grid, 1, sum)
-      grid <- grid[which(sums > 0 & sums <= constraint),]
-      colnames(grid) <- state.names[seq(from=st.tally, length=char.state[ch])]
-      grid <- cbind(grid, pro=NA, n=NA, row=NA)
-      if(!is.logical(wf)) {
-        if(is.data.frame(wf)) {
-          for(s in 1:nrow(grid)) {
-            grid[s,length(traits)+2] <- length(which(apply(wf[,traits+3], 1, paste, collapse=".")==paste(grid[s,seq_along(traits)], collapse=".")))
+      grid <- grid[which(sums > 0 & sums <= constraint), ]
+      colnames(grid) <-
+        state.names[seq(from = st.tally, length = char.state[ch])]
+      grid <- cbind(grid, pro = NA, n = NA, row = NA)
+      if (!is.logical(wf)) {
+        if (is.data.frame(wf)) {
+          for (s in 1:nrow(grid)) {
+            grid[s, length(traits) + 2] <-
+              length(which(apply(wf[, traits + 3], 1, paste, collapse = ".") == paste(grid[s, seq_along(traits)], collapse = ".")))
           }
         } else {
-          grid$n <- wf[seq(from=wt, length=nrow(grid))]
+          grid$n <- wf[seq(from = wt, length = nrow(grid))]
           wt <- wt + nrow(grid)
         }
         grid$pro <- grid$n / sum(grid$n)
-      } else { grid$pro <- 1 / nrow(grid) }
+      } else {
+        grid$pro <- 1 / nrow(grid)
+      }
       st.tally <- st.tally + char.state[ch]
       wf.tally <- wf.tally + char.state[ch]
     }
-    if(char.type[ch]=="ord.num") {
-      grid <- data.frame(round(seq(from=0, to=1, length=char.state[ch]), 3))
+    if (char.type[ch] == "ord.num") {
+      grid <-
+        data.frame(round(seq(from = 0, to = 1, length = char.state[ch]), 3))
       colnames(grid) <- state.names[st.tally]
-      grid <- cbind(grid, pro=NA, n=NA, row=row(grid)[,1])
-      if(!is.logical(wf)) {
-        if(is.data.frame(wf)) {
-          grid$n <- table(factor(wf[,wf.tally+3], levels=grid[,1]))
+      grid <- cbind(grid, pro = NA, n = NA, row = row(grid)[, 1])
+      if (!is.logical(wf)) {
+        if (is.data.frame(wf)) {
+          grid$n <- table(factor(wf[, wf.tally + 3], levels = grid[, 1]))
           grid$pro <- grid$n / sum(grid$n)
         } else {
-          grid$n <- wf[seq(from=wt, length=nrow(grid))]
+          grid$n <- wf[seq(from = wt, length = nrow(grid))]
           grid$pro <- grid$n / sum(grid$n)
           wt <- wt + nrow(grid)
         }
-      } else { grid$pro <- 1 / nrow(grid) }
+      } else {
+        grid$pro <- 1 / nrow(grid)
+      }
       st.tally <- st.tally + 1
       wf.tally <- wf.tally + 1
     }
-    if(char.type[ch]=="ord.fac" | char.type[ch]=="factor") {
-      traits <- seq(from=st.tally, length=char.state[ch])
-      if(char.type[ch]=="ord.fac") ord=TRUE else ord=FALSE
-      grid <- data.frame(factor(state.names[traits], ordered=ord))
+    if (char.type[ch] == "ord.fac" | char.type[ch] == "factor") {
+      traits <- seq(from = st.tally, length = char.state[ch])
+      if (char.type[ch] == "ord.fac") {
+        ord = TRUE
+      } else {
+        ord = FALSE
+      }
+      grid <- data.frame(factor(state.names[traits], ordered = ord))
       colnames(grid) <- state.names[st.tally]
-      grid <- cbind(grid, pro=NA, n=NA, row=row(grid)[,1])
-      if(!is.logical(wf)) {
-        if(is.data.frame(wf)) {
-          grid$n <- table(factor(wf[,wf.tally+3], levels=state.names[traits]))
+      grid <- cbind(grid, pro = NA, n = NA, row = row(grid)[, 1])
+      if (!is.logical(wf)) {
+        if (is.data.frame(wf)) {
+          grid$n <- table(factor(wf[, wf.tally + 3], levels = state.names[traits]))
           grid$pro <- grid$n / sum(grid$n)
         } else {
-          grid$n <- wf[seq(from=wt, length=nrow(grid))]
+          grid$n <- wf[seq(from = wt, length = nrow(grid))]
           grid$pro <- grid$n / sum(grid$n)
           wt <- wt + nrow(grid)
         }
-      } else { grid$pro <- 1 / nrow(grid) }
+      } else {
+        grid$pro <- 1 / nrow(grid)
+      }
       st.tally <- st.tally + char.state[ch]
       wf.tally <- wf.tally + 1
     }
     # Delete character combinations not realized in weight.file
-    grid <- grid[which(grid$pro > 0),]
+    grid <- grid[which(grid$pro > 0), ]
     grid$row <- seq.int(grid$row)
     out[[ch]]$char.space <- grid
-    out[[ch]]$allowed.combos <- as.vector(apply(as.matrix(grid[,seq_len(ncol(grid) - 3)]), 1, paste, collapse="."))
+    out[[ch]]$allowed.combos <-
+      as.vector(apply(as.matrix(grid[, seq_len(ncol(grid) - 3)]), 1, paste, collapse = "."))
   }
   out[[nchar + 1]]$constraint <- constraint
   # Prepare species pool (if using) and update to exclude those taxa not allowed by constraints of ecospace (and create array of state weights)
   seq <- seq_len(nchar)
-  cs <- sapply(seq, function(seq) ncol(out[[seq]]$char.space) - 3)
-  c.start <- c(1, cumsum(cs)[1:nchar-1] + 1)
+  cs <- sapply(seq, function(seq)
+    ncol(out[[seq]]$char.space) - 3)
+  c.start <- c(1, cumsum(cs)[1:nchar - 1] + 1)
   c.end <- cumsum(cs)
-  out[[nchar + 1]]$wts <- as.vector(unlist(sapply(seq, function(seq) as.numeric(out[[seq]]$char.space$pro))))
-  if(!is.data.frame(wf)) { pool <- NA } else {
-    pool <- wf[,4:ncol(wf)]
-    allow <- matrix(FALSE, nrow=nrow(pool), ncol=nchar)
+  out[[nchar + 1]]$wts <-
+    as.vector(unlist(sapply(seq, function(seq)
+      as.numeric(out[[seq]]$char.space$pro))))
+  if (!is.data.frame(wf)) {
+    pool <- NA
+  } else {
+    pool <- wf[, 4:ncol(wf)]
+    allow <- matrix(FALSE, nrow = nrow(pool), ncol = nchar)
     seq <- seq_len(nrow(allow))
-    for (ch in 1:nchar) { allow[,ch] <- apply(as.matrix(pool[seq,c.start[ch]:c.end[ch]]), 1, paste, collapse=".") %in% out[[ch]]$allowed.combos }
+    for (ch in 1:nchar) {
+      allow[, ch] <-
+        apply(as.matrix(pool[seq, c.start[ch]:c.end[ch]]), 1, paste, collapse =
+                ".") %in% out[[ch]]$allowed.combos
+    }
     allow <- apply(allow, 1, all)
-    pool <- pool[allow==TRUE,]
+    pool <- pool[allow == TRUE, ]
   }
-  if(any(is.numeric(wf), is.integer(wf), is.array(wf)) & (wt - 1)!=length(wf)) stop("weight file is a different length than number of allowable state combinations.\n")
+  if (any(is.numeric(wf), is.integer(wf), is.array(wf)) &
+      (wt - 1) != length(wf))
+    stop("weight file is a different length than number of allowable state combinations.\n")
   out[[nchar + 1]]$pool <- pool
   class(out) <- "ecospace"
   return(out)

@@ -11,4 +11,5 @@
 #' @seealso \code{\link[base]{sample}}
 #'
 #' @export
-sample2 <- function(x, ...) x[sample.int(length(x), ...)]
+sample2 <- function(x, ...)
+  x[sample.int(length(x), ...)]

@@ -140,53 +140,70 @@
 #'
 #' @export
 expansion <- function(nreps=1, Sseed, Smax, ecospace, method="Euclidean", strength=1) {
-  if(strength < 0 | strength > 1) stop("strength must have a value between 0 and 1\n")
+  if (strength < 0 | strength > 1)
+    stop("strength must have a value between 0 and 1\n")
   nchar <- length(ecospace) - 1
   seq <- seq_len(nchar)
   pool <- ecospace[[length(ecospace)]]$pool
-  state.names <- unlist(sapply(seq, function(seq) colnames(ecospace[[seq]]$char.space)[seq_len(ncol(ecospace[[seq]]$char.space) - 3)]))
-  char.type <- sapply(seq, function(seq) ecospace[[seq]]$type)
-  if(method != "Euclidean" | any(char.type == "factor") | any(char.type == "ord.fac")) method <- "Gower"
-  cs <- sapply(seq, function(seq) ncol(ecospace[[seq]]$char.space) - 3)
-  c.start <- c(1, cumsum(cs)[1:nchar-1] + 1)
+  state.names <- unlist(sapply(seq, function(seq)
+      colnames(ecospace[[seq]]$char.space)[seq_len(ncol(ecospace[[seq]]$char.space) - 3)]))
+  char.type <- sapply(seq, function(seq)
+    ecospace[[seq]]$type)
+  if (method != "Euclidean" | any(char.type == "factor") | any(char.type == "ord.fac"))
+    method <- "Gower"
+  cs <- sapply(seq, function(seq)
+      ncol(ecospace[[seq]]$char.space) - 3)
+  c.start <- c(1, cumsum(cs)[1:nchar - 1] + 1)
   c.end <- cumsum(cs)
   data <- prep_data(ecospace, Smax)
-  for (sp in 1:Smax){
-    if(sp <= Sseed) {
-      if (!is.logical(pool)) { data[sp,] <- pool[sample2(seq_len(nrow(pool)), 1),]
+  for (sp in 1:Smax) {
+    if (sp <= Sseed) {
+      if (!is.logical(pool)) {
+        data[sp, ] <- pool[sample2(seq_len(nrow(pool)), 1), ]
       } else {
         for (ch in 1:nchar) {
           c.sp <- ecospace[[ch]]$char.space
-          data[sp, c.start[ch]:c.end[ch]] <- c.sp[c.sp[(rmultinom(1, 1, prob=c.sp$pro)==1), ncol(c.sp)], seq_len(cs[ch])]
+          data[sp, c.start[ch]:c.end[ch]] <-
+            c.sp[c.sp[(rmultinom(1, 1, prob = c.sp$pro) == 1), ncol(c.sp)], seq_len(cs[ch])]
         }
       }
     } else {
       # Choose ecospace-appropriate distance metric.
-      if(method=="Gower") { dist <- FD::gowdis(data[seq_len(sp - 1),]) } else { dist <- dist(data[seq_len(sp - 1),]) }
+      if (method == "Gower") {
+        dist <- FD::gowdis(data[seq_len(sp - 1), ])
+      } else {
+        dist <- dist(data[seq_len(sp - 1), ])
+      }
       d <- as.matrix(dist)
-      d[row(d)==col(d)] <- NA	# Make diagonals missing
+      d[row(d) == col(d)] <- NA	# Make diagonals missing
       # Identify farthest pair
-      mnd <- max(d, na.rm=TRUE)
-      pairs <- arrayInd(which(d==mnd), dim(d))
-      pick <- rbind(data[pairs[sample2(seq_len(nrow(pairs)), 1),],])
+      mnd <- max(d, na.rm = TRUE)
+      pairs <- arrayInd(which(d == mnd), dim(d))
+      pick <- rbind(data[pairs[sample2(seq_len(nrow(pairs)), 1), ], ])
       for (ch in 1:nchar) {
         c.sp <- ecospace[[ch]]$char.space
         st <- seq_len(cs[ch])
-        opts.l <- length(unique(unlist(c.sp[,st])))
-        opts <- apply(as.matrix(c.sp[,st]), 2, unique2, length=opts.l)
-        ps <- as.matrix(pick[,c.start[ch]:c.end[ch]])
+        opts.l <- length(unique(unlist(c.sp[, st])))
+        opts <- apply(as.matrix(c.sp[, st]), 2, unique2, length = opts.l)
+        ps <- as.matrix(pick[, c.start[ch]:c.end[ch]])
         # Repeat until yields "allowable" ecospace combination
         repeat {
-          if(runif(1, 0, 1) <= strength) {
-            if(ecospace[[ch]]$type == "factor") {
-              data[sp, c.start[ch]:c.end[ch]] <- sample2(ecospace[[ch]]$allowed.combos, 1)
+          if (runif(1, 0, 1) <= strength) {
+            if (ecospace[[ch]]$type == "factor") {
+              data[sp, c.start[ch]:c.end[ch]] <-
+                sample2(ecospace[[ch]]$allowed.combos, 1)
             } else {
-              data[sp, c.start[ch]:c.end[ch]] <- sapply(st, function(st) sample2(opts[which(opts[,st] >= max(ps[,st]) | opts[,st] <= min(ps[,st])),st], 1))
+              data[sp, c.start[ch]:c.end[ch]] <-
+                sapply(st, function(st)
+                  sample2(opts[which(opts[, st] >= max(ps[, st]) |
+                                       opts[, st] <= min(ps[, st])), st], 1))
             }
           } else {
-            data[sp, c.start[ch]:c.end[ch]] <- c.sp[c.sp[(rmultinom(1, 1, prob=c.sp$pro)==1), ncol(c.sp)], seq_len(cs[ch])]
+            data[sp, c.start[ch]:c.end[ch]] <-
+              c.sp[c.sp[(rmultinom(1, 1, prob = c.sp$pro) == 1), ncol(c.sp)], seq_len(cs[ch])]
           }
-          if(paste(data[sp, c.start[ch]:c.end[ch]], collapse=".") %in% ecospace[[ch]]$allowed.combos) break
+          if (paste(data[sp, c.start[ch]:c.end[ch]], collapse = ".") %in% ecospace[[ch]]$allowed.combos)
+            break
         }
       }
     }

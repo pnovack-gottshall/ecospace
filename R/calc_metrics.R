@@ -261,39 +261,73 @@
 #' str(metrics)
 #' }
 #'@export
-calc_metrics <- function(nreps=1, samples=NA, Smax=NA, Model="", Param="", m=3, corr="lingoes", method="Euclidean", increm = TRUE) {
-  if(is.logical(samples)) stop("you must provide a list of samples to calculate\n")
-  if(is.data.frame(samples)) sample <- samples else sample <- samples[[nreps]]
-  if(!is.data.frame(sample)) stop("samples is not a data frame or list of data frames\n.")
-  if(Model=="") warning("you did not specify a model name. Model will be left empty.\n")
-  if(Param=="") warning("you did not specify a parameter value. Param will be left empty.\n")
-  if(!is.numeric(Smax)) ns <- nrow(sample) else ns <- Smax
-  if(increm) Smin <- 1 else Smin <- ns
-  if(method != "Euclidean" | any(sapply(sample, data.class) == "factor") | any(sapply(sample, data.class) == "ordered")) method <- "Gower"
-  odir <- setwd(tempdir())     # Specify the pre-built (and CPU-process unique) temp directory for storage of vert.txt temp files for convex hull calculations
-  on.exit(setwd(odir))
-  sam.out <- data.frame(Model=Model, Param=Param, S=numeric(ns), H=numeric(ns), D=numeric(ns), M=numeric(ns), V=numeric(ns), FRic=numeric(ns), FEve=numeric(ns), FDiv=numeric(ns), FDis=numeric(ns), qual.FRic=numeric(ns))
-  for (s in Smin:ns) {
-    sam <- sample[1:s,]
-    sam.out$S[s] <- s
-    H <- nrow(unique(sam))
-    sam.out$H[s] <- H
-    if(method=="Gower") { dist <- FD::gowdis(sam) } else { dist <- dist(sam) }
-    if(any(is.nan(dist)) | length(dist) == 0) next
-    sam.out$D[s] <- mean(dist)
-    sam.out$M[s] <- max(dist)
-    sam.out$V[s] <- sqrt(sum(apply(sam, 2, var, na.rm=TRUE)))
-    if(s <= m | H <= m) next
-    FD <- FD::dbFD(dist, m=m, w.abun=FALSE, messages=FALSE, corr=corr)
-    sam.out$FDis[s] <- FD$FDis
-    sam.out$FEve[s] <- FD$FEve
-    if(!is.null(FD$FRic)) {
-      sam.out$FRic[s] <- FD$FRic
-      sam.out$qual.FRic[s] <- FD$qual.FRic
-      if(!is.null(FD$FDiv)) sam.out$FDiv[s] <- FD$FDiv else sam.out$FDiv[s] <- NA
-      sam.out$FDiv[s] <- FD$FDiv
+calc_metrics <-
+  function(nreps = 1, samples = NA, Smax = NA, Model = "", Param = "",
+           m = 3, corr = "lingoes", method = "Euclidean", increm = TRUE) {
+    if (is.logical(samples))
+      stop("you must provide a list of samples to calculate\n")
+    if (is.data.frame(samples))
+      sample <- samples
+    else
+      sample <- samples[[nreps]]
+    if (!is.data.frame(sample))
+      stop("samples is not a data frame or list of data frames\n.")
+    if (Model == "")
+      warning("you did not specify a model name. Model will be left empty.\n")
+    if (Param == "")
+      warning("you did not specify a parameter value. Param will be left empty.\n")
+    if (!is.numeric(Smax))
+      ns <- nrow(sample)
+    else
+      ns <- Smax
+    if (increm)
+      Smin <- 1
+    else
+      Smin <- ns
+    if (method != "Euclidean" |
+        any(sapply(sample, data.class) == "factor") |
+        any(sapply(sample, data.class) == "ordered"))
+      method <- "Gower"
+    odir <-
+      setwd(tempdir())     # Specify the pre-built (and CPU-process unique) temp directory for storage of vert.txt temp files for convex hull calculations
+    on.exit(setwd(odir))
+    sam.out <-
+      data.frame(Model = Model, Param = Param, S = numeric(ns),
+        H = numeric(ns), D = numeric(ns), M = numeric(ns), V = numeric(ns),
+        FRic = numeric(ns), FEve = numeric(ns), FDiv = numeric(ns),
+        FDis = numeric(ns), qual.FRic = numeric(ns))
+    for (s in Smin:ns) {
+      sam <- sample[1:s, ]
+      sam.out$S[s] <- s
+      H <- nrow(unique(sam))
+      sam.out$H[s] <- H
+      if (method == "Gower") {
+        dist <- FD::gowdis(sam)
+      } else {
+        dist <- dist(sam)
+      }
+      if (any(is.nan(dist)) | length(dist) == 0)
+        next
+      sam.out$D[s] <- mean(dist)
+      sam.out$M[s] <- max(dist)
+      sam.out$V[s] <- sqrt(sum(apply(sam, 2, var, na.rm = TRUE)))
+      if (s <= m | H <= m)
+        next
+      FD <-
+        FD::dbFD(dist, m = m, w.abun = FALSE, messages = FALSE, corr = corr)
+      sam.out$FDis[s] <- FD$FDis
+      sam.out$FEve[s] <- FD$FEve
+      if (!is.null(FD$FRic)) {
+        sam.out$FRic[s] <- FD$FRic
+        sam.out$qual.FRic[s] <- FD$qual.FRic
+        if (!is.null(FD$FDiv))
+          sam.out$FDiv[s] <- FD$FDiv
+        else
+          sam.out$FDiv[s] <- NA
+        sam.out$FDiv[s] <- FD$FDiv
+      }
     }
+    if (!increm)
+      sam.out <- sam.out[s,]
+    return(sam.out)
   }
-  if(!increm) sam.out <- sam.out[s, ]
-  return(sam.out)
-}

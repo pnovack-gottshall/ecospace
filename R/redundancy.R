@@ -113,32 +113,40 @@
 #'
 #' @export
 redundancy <- function(nreps=1, Sseed, Smax, ecospace, strength=1) {
-  if(strength < 0 | strength > 1) stop("strength must have a value between 0 and 1\n")
+  if (strength < 0 | strength > 1)
+    stop("strength must have a value between 0 and 1\n")
   nchar <- length(ecospace) - 1
   seq <- seq_len(nchar)
   pool <- ecospace[[length(ecospace)]]$pool
-  state.names <- unlist(sapply(seq, function(seq) colnames(ecospace[[seq]]$char.space)[seq_len(ncol(ecospace[[seq]]$char.space) - 3)]))
-  cs <- sapply(seq, function(seq) ncol(ecospace[[seq]]$char.space) - 3)
-  c.start <- c(1, cumsum(cs)[1:nchar-1] + 1)
+  state.names <-
+    unlist(sapply(seq, function(seq)
+      colnames(ecospace[[seq]]$char.space)[seq_len(ncol(ecospace[[seq]]$char.space) - 3)]))
+  cs <-
+    sapply(seq, function(seq)
+      ncol(ecospace[[seq]]$char.space) - 3)
+  c.start <- c(1, cumsum(cs)[1:nchar - 1] + 1)
   c.end <- cumsum(cs)
   data <- prep_data(ecospace, Smax)
-  for (sp in 1:Smax){
-    if(sp <= Sseed) {
+  for (sp in 1:Smax) {
+    if (sp <= Sseed) {
       if (!is.logical(pool)) {
-        data[sp,] <- pool[sample2(seq_len(nrow(pool)), 1),]
+        data[sp, ] <- pool[sample2(seq_len(nrow(pool)), 1), ]
       } else {
         for (ch in 1:nchar) {
           c.sp <- ecospace[[ch]]$char.space
-          data[sp, c.start[ch]:c.end[ch]] <- c.sp[c.sp[(rmultinom(1, 1, prob=c.sp$pro)==1), ncol(c.sp)], seq_len(cs[ch])]
+          data[sp, c.start[ch]:c.end[ch]] <-
+            c.sp[c.sp[(rmultinom(1, 1, prob = c.sp$pro) == 1), ncol(c.sp)], seq_len(cs[ch])]
         }
       }
     } else {
       pick <- sample2(seq_len(sp - 1), 1)
       for (ch in 1:nchar) {
-        if(runif(1, 0, 1) <= strength) { data[sp, c.start[ch]:c.end[ch]] <- data[pick, c.start[ch]:c.end[ch]]
+        if (runif(1, 0, 1) <= strength) {
+          data[sp, c.start[ch]:c.end[ch]] <- data[pick, c.start[ch]:c.end[ch]]
         } else {
           c.sp <- ecospace[[ch]]$char.space
-          data[sp, c.start[ch]:c.end[ch]] <- c.sp[c.sp[(rmultinom(1, 1, prob=c.sp$pro)==1), ncol(c.sp)], seq_len(cs[ch])]
+          data[sp, c.start[ch]:c.end[ch]] <-
+            c.sp[c.sp[(rmultinom(1, 1, prob = c.sp$pro) == 1), ncol(c.sp)], seq_len(cs[ch])]
         }
       }
     }

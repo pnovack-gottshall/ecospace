@@ -26,6 +26,7 @@
 #' @export
 unique2 <- function(x, length=1, ...) {
   out <- unique(x, ...)
-  if(length(out)==1) out <- rep(out, length)
+  if (length(out) == 1)
+    out <- rep(out, length)
   return(out)
-  }
+}
