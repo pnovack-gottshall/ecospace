@@ -5,6 +5,7 @@
 \section{Changes in version 1.2.4 (2018-02-18)}{
   \itemize{
     \item Corrected examples for rbind_listdf.
+    \item Functions reformatted to Google / Hadley style.
   }
 }
 

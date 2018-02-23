@@ -266,24 +266,27 @@ calc_metrics <-
            m = 3, corr = "lingoes", method = "Euclidean", increm = TRUE) {
     if (is.logical(samples))
       stop("you must provide a list of samples to calculate\n")
-    if (is.data.frame(samples))
+    if (is.data.frame(samples)) {
       sample <- samples
-    else
+    } else {
       sample <- samples[[nreps]]
+    }
     if (!is.data.frame(sample))
       stop("samples is not a data frame or list of data frames\n.")
     if (Model == "")
       warning("you did not specify a model name. Model will be left empty.\n")
     if (Param == "")
       warning("you did not specify a parameter value. Param will be left empty.\n")
-    if (!is.numeric(Smax))
+    if (!is.numeric(Smax)) {
       ns <- nrow(sample)
-    else
+    } else {
       ns <- Smax
-    if (increm)
+    }
+    if (increm) {
       Smin <- 1
-    else
+    } else {
       Smin <- ns
+    }
     if (method != "Euclidean" |
         any(sapply(sample, data.class) == "factor") |
         any(sapply(sample, data.class) == "ordered"))
@@ -320,10 +323,11 @@ calc_metrics <-
       if (!is.null(FD$FRic)) {
         sam.out$FRic[s] <- FD$FRic
         sam.out$qual.FRic[s] <- FD$qual.FRic
-        if (!is.null(FD$FDiv))
+        if (!is.null(FD$FDiv)) {
           sam.out$FDiv[s] <- FD$FDiv
-        else
+        } else {
           sam.out$FDiv[s] <- NA
+        }
         sam.out$FDiv[s] <- FD$FDiv
       }
     }
