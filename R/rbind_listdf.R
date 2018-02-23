@@ -114,26 +114,33 @@
 #' }
 #'
 #' @export
-rbind_listdf <- function(lists=NULL, seq.by=100) {
+rbind_listdf <- function(lists = NULL, seq.by = 100) {
   nr <- length(lists)
-  seq.start <- seq.int(1, nr, by=seq.by)
+  seq.start <- seq.int(1, nr, by = seq.by)
   lseq <- length(seq.start)
   seq.end <- sort(unique(c((seq.start - 1), nr)))
   seq.end <- seq.end[seq.end >= min(seq.start) & seq.end <= nr]
   seq.start <- seq.start[1:length(seq.end)]
-  alphas <- expand.grid(LETTERS[1:26], LETTERS[1:26] , LETTERS[1:26], LETTERS[1:26])
-  alphas <- paste(alphas[,4], alphas[,3], alphas[,2], alphas[,1], sep="")
-  if(lseq > length(alphas)) stop("only 456,976 temporary variables to store more than that many parts. Make seq.by larger (or modify original rbind_listdf function\n")
-  dfs <- paste("df", alphas[seq(lseq)], sep="")
+  alphas <-
+    expand.grid(LETTERS[1:26], LETTERS[1:26] , LETTERS[1:26], LETTERS[1:26])
+  alphas <-
+    paste(alphas[, 4], alphas[, 3], alphas[, 2], alphas[, 1], sep = "")
+  if (lseq > length(alphas))
+    stop(
+      "only 456,976 temporary variables to store more than that many parts. Make seq.by larger (or modify original rbind_listdf function)\n"
+    )
+  dfs <- paste("df", alphas[seq(lseq)], sep = "")
   # rbind as small pieces:
   for (b in 1:lseq) {
-    assign(dfs[b], data.frame())# Create blank dfs
-    for(c in seq.start[b]:seq.end[b]) {
+    assign(dfs[b], data.frame()) # Create blank dfs
+    for (c in seq.start[b]:seq.end[b]) {
       assign(dfs[b], rbind(get(dfs[b]), lists[[c]]))
     }
   }
   # rbind all back together:
   out <- data.frame()
-  for(b in 1:lseq) { out <- rbind(out, get(dfs[b])) }
+  for (b in 1:lseq) {
+    out <- rbind(out, get(dfs[b]))
+  }
   return(out)
 }
