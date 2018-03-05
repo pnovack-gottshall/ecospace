@@ -24,7 +24,9 @@ can be binary, numeric, ordered numeric, factor, or ordered factor types.}
 \item{Smax}{Maximum number of \code{samples} rows (species) to include in
 calculations, incremented starting with first row. Default (\code{NA}) is to
 increment to the maximum number of \code{samples} rows (calculated
-separately for each data frame sample, if a list of data frames).}
+separately for each data frame sample, if a list of data frames). If
+\code{Smax} is greater than the size of a sample, then calculation stops
+after calculating the sample statistics and issues a warning.}
 
 \item{Model}{Optional character string or numeric value naming simulation
 model. A warning issues if left blank.}

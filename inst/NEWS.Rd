@@ -2,6 +2,14 @@
 \title{ecospace News}
 \encoding{UTF-8}
 
+\section{Changes in version 1.3.1 (2018-03-05)}{
+  \itemize{
+    \item Add warning to create_ecospace when number of character states you provide does not match those in the provided weight.file. (Thanks for Edicson Parra Sanchez for catching the error.)
+    \item Add warning to calc_metrics when Smax provided is greater than size of sample.
+    \item create_ecospace now correctly labels headings for factor characters.
+  }
+}
+
 \section{Changes in version 1.2.4 (2018-02-18)}{
   \itemize{
     \item Corrected examples for rbind_listdf.

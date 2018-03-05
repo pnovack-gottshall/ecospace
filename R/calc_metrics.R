@@ -21,7 +21,9 @@
 #'@param Smax Maximum number of \code{samples} rows (species) to include in
 #'  calculations, incremented starting with first row. Default (\code{NA}) is to
 #'  increment to the maximum number of \code{samples} rows (calculated
-#'  separately for each data frame sample, if a list of data frames).
+#'  separately for each data frame sample, if a list of data frames). If
+#'  \code{Smax} is greater than the size of a sample, then calculation stops
+#'  after calculating the sample statistics and issues a warning.
 #'@param Model Optional character string or numeric value naming simulation
 #'  model. A warning issues if left blank.
 #'@param Param Optional numeric value or character string naming strength
@@ -282,6 +284,9 @@ calc_metrics <-
     } else {
       ns <- Smax
     }
+    if (ns < Smax)
+      warning("Smax specified is greater than sample size. Calculation stopped
+prematurely when reached complete sample size.\n")
     if (increm) {
       Smin <- 1
     } else {
@@ -332,6 +337,6 @@ calc_metrics <-
       }
     }
     if (!increm)
-      sam.out <- sam.out[s,]
+      sam.out <- sam.out[s, ]
     return(sam.out)
   }

@@ -32,8 +32,9 @@ absences"). See 'Details' for additional explanation.}
 numeric, integer, or array) of relative weights for ecospace
 character-state probabilities. Default action omits such probabilities and
 creates equal weighting among states. If a data frame is supplied, the
-first three columns should be (1) class [or similar taxonomic identifier],
-(2) genus, and (3) species names.}
+first three columns must be (1) class [or similar taxonomic identifier],
+(2) genus, and (3) species names (or three dummy columns that will be
+ignored by algorithm).}
 }
 \value{
 Returns a list of class \code{ecospace} describing the structure of
@@ -47,7 +48,7 @@ Returns a list of class \code{ecospace} describing the structure of
   \item{\code{char.space}}{data frame listing each allowable state
   combination in each row, the calculated proportional weight (\code{pro}),
   frequency (\code{n}) of observed species with such state combination in
-  species pool(\code{weight.file}, if supplied).}
+  species pool (\code{weight.file}, if supplied).}
   \item{\code{allowed.combos}}{allowed character state combinations allowed
   by \code{constraint} and \code{weight.file}, if supplied.}}
 
@@ -87,11 +88,12 @@ This function specifies the data structure for a theoretical
   multistate. See below for examples and more discussion on these
   implementations. \item \code{ord.num} for ordered numeric values, whether
   discrete or continuous. Examples include body size, metabolic rate, or
-  temperature tolerance. \item \code{ord.fac} for ordered factor characters
-  (factors with a specified order). An example is mobility: habitual >
-  intermittent > facultative > passive > sedentary. (If wish to specify
-  relative distances between these ordered factors, it is best to use an
-  ordered numeric character type instead). \item \code{ord.factor} for
+  temperature tolerance. States are pulled as sorted unique levels from
+  \code{weight.file}, if provided. \item \code{ord.fac} for ordered factor
+  characters (factors with a specified order). An example is mobility:
+  habitual > intermittent > facultative > passive > sedentary. (If wish to
+  specify relative distances between these ordered factors, it is best to use
+  an ordered numeric character type instead). \item \code{ord.factor} for
   discrete, unordered factors (e.g., diet can have states of autotrophic,
   carnivorous, herbivorous, or microbivorous).}
 

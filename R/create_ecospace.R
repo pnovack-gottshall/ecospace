@@ -20,8 +20,9 @@
 #'   numeric, integer, or array) of relative weights for ecospace
 #'   character-state probabilities. Default action omits such probabilities and
 #'   creates equal weighting among states. If a data frame is supplied, the
-#'   first three columns should be (1) class [or similar taxonomic identifier],
-#'   (2) genus, and (3) species names.
+#'   first three columns must be (1) class [or similar taxonomic identifier],
+#'   (2) genus, and (3) species names (or three dummy columns that will be
+#'   ignored by algorithm).
 #'
 #' @details This function specifies the data structure for a theoretical
 #'   ecospace framework used in Monte Carlo simulations of ecological
@@ -46,11 +47,12 @@
 #'   multistate. See below for examples and more discussion on these
 #'   implementations. \item \code{ord.num} for ordered numeric values, whether
 #'   discrete or continuous. Examples include body size, metabolic rate, or
-#'   temperature tolerance. \item \code{ord.fac} for ordered factor characters
-#'   (factors with a specified order). An example is mobility: habitual >
-#'   intermittent > facultative > passive > sedentary. (If wish to specify
-#'   relative distances between these ordered factors, it is best to use an
-#'   ordered numeric character type instead). \item \code{ord.factor} for
+#'   temperature tolerance. States are pulled as sorted unique levels from
+#'   \code{weight.file}, if provided. \item \code{ord.fac} for ordered factor
+#'   characters (factors with a specified order). An example is mobility:
+#'   habitual > intermittent > facultative > passive > sedentary. (If wish to
+#'   specify relative distances between these ordered factors, it is best to use
+#'   an ordered numeric character type instead). \item \code{ord.factor} for
 #'   discrete, unordered factors (e.g., diet can have states of autotrophic,
 #'   carnivorous, herbivorous, or microbivorous).}
 #'
@@ -98,7 +100,7 @@
 #'   \item{\code{char.space}}{data frame listing each allowable state
 #'   combination in each row, the calculated proportional weight (\code{pro}),
 #'   frequency (\code{n}) of observed species with such state combination in
-#'   species pool(\code{weight.file}, if supplied).}
+#'   species pool (\code{weight.file}, if supplied).}
 #'   \item{\code{allowed.combos}}{allowed character state combinations allowed
 #'   by \code{constraint} and \code{weight.file}, if supplied.}}
 #'
@@ -306,8 +308,18 @@ create_ecospace <- function(nchar, char.state, char.type, char.names=NA, state.n
       wf.tally <- wf.tally + char.state[ch]
     }
     if (char.type[ch] == "ord.num") {
-      grid <-
-        data.frame(round(seq(from = 0, to = 1, length = char.state[ch]), 3))
+      if (is.data.frame(wf)) {
+        grid <- data.frame(sort(unique(wf[, wf.tally + 3])))
+        if (nrow(grid) != char.state[ch]) {
+          warning(paste("You specified that there were", char.state[ch],
+              "char.states for character", ch, "but weight.file\n", "has",
+              nrow(grid), "char.states. Ecospace built using number in
+              weight.file\n"))
+        }
+      } else {
+        grid <-
+          data.frame(round(seq(from = 0, to = 1, length = char.state[ch]), 3))
+      }
       colnames(grid) <- state.names[st.tally]
       grid <- cbind(grid, pro = NA, n = NA, row = row(grid)[, 1])
       if (!is.logical(wf)) {
@@ -333,7 +345,7 @@ create_ecospace <- function(nchar, char.state, char.type, char.names=NA, state.n
         ord = FALSE
       }
       grid <- data.frame(factor(state.names[traits], ordered = ord))
-      colnames(grid) <- state.names[st.tally]
+      colnames(grid) <- char.names[ch]
       grid <- cbind(grid, pro = NA, n = NA, row = row(grid)[, 1])
       if (!is.logical(wf)) {
         if (is.data.frame(wf)) {
