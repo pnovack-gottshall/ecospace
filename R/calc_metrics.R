@@ -283,10 +283,11 @@ calc_metrics <-
       ns <- nrow(sample)
     } else {
       ns <- Smax
+      if (ns < Smax) {
+        warning("Smax specified is greater than sample size. Calculation
+              stopped prematurely when reached complete sample size.\n")
+      }
     }
-    if (ns < Smax)
-      warning("Smax specified is greater than sample size. Calculation stopped
-prematurely when reached complete sample size.\n")
     if (increm) {
       Smin <- 1
     } else {

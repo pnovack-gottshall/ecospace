@@ -12,7 +12,7 @@
 
 <meta name="author" content="Phil Novack-Gottshall" />
 
-<meta name="date" content="2018-02-17" />
+<meta name="date" content="2018-03-05" />
 
 <title>ecospace: Simulating Community Assembly and Ecological Diversification Using Ecospace Frameworks</title>
 
@@ -70,7 +70,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore">ecospace: Simulating Community Assembly and Ecological Diversification Using Ecospace Frameworks</h1>
 <h4 class="author"><em>Phil Novack-Gottshall</em></h4>
-<h4 class="date"><em>2018-02-17</em></h4>
+<h4 class="date"><em>2018-03-05</em></h4>
 
 
 
@@ -131,8 +131,9 @@ redund_sample &lt;-<span class="st"> </span><span class="kw">redundancy</span>(<
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">314</span>)
 redund_sample2 &lt;-<span class="st"> </span><span class="kw">redundancy</span>(<span class="dt">Sseed=</span>Sseed, <span class="dt">Smax=</span>Smax, <span class="dt">ecospace=</span>ecospace, <span class="dt">strength=</span><span class="fl">0.95</span>)</code></pre></div>
 <p>Plot both ‘redundancy’ assemblages (using PCA with Gower dissimilarity), showing order of assembly. Seed species in red, next 5 in black, remainder in gray. Notice the redundancy models produce an ecospace with discrete clusters of life habits.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(FD, <span class="dt">quietly=</span><span class="ot">TRUE</span>)
-pc &lt;-<span class="st"> </span><span class="kw">prcomp</span>(FD<span class="op">::</span><span class="kw">gowdis</span>(redund_sample))
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(FD, <span class="dt">quietly=</span><span class="ot">TRUE</span>)</code></pre></div>
+<pre><code>## This is vegan 2.4-6</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pc &lt;-<span class="st"> </span><span class="kw">prcomp</span>(FD<span class="op">::</span><span class="kw">gowdis</span>(redund_sample))
 <span class="kw">plot</span>(pc<span class="op">$</span>x, <span class="dt">type=</span><span class="st">&quot;n&quot;</span>, <span class="dt">main=</span><span class="kw">paste</span>(<span class="st">&quot;Redundancy model,</span><span class="ch">\n</span><span class="st">&quot;</span>, Smax, <span class="st">&quot;species&quot;</span>))
 <span class="kw">text</span>(pc<span class="op">$</span>x[,<span class="dv">1</span>], pc<span class="op">$</span>x[,<span class="dv">2</span>], <span class="dt">labels=</span><span class="kw">seq</span>(Smax), <span class="dt">col=</span><span class="kw">c</span>(<span class="kw">rep</span>(<span class="st">&quot;red&quot;</span>, Sseed), <span class="kw">rep</span>(<span class="st">&quot;black&quot;</span>, <span class="dv">5</span>),
   <span class="kw">rep</span>(<span class="st">&quot;slategray&quot;</span>, (Smax <span class="op">-</span><span class="st"> </span>Sseed <span class="op">-</span><span class="st"> </span><span class="dv">5</span>))), <span class="dt">pch=</span><span class="kw">c</span>(<span class="kw">rep</span>(<span class="dv">19</span>, Sseed), <span class="kw">rep</span>(<span class="dv">21</span>, (Smax <span class="op">-</span><span class="st"> </span>Sseed))),
@@ -235,7 +236,7 @@ leg.pch &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv"
 <h2>Calculate ecological disparity (functional diversity) metrics</h2>
 <p>The package wraps around dbFD() in package FD to calculate common ecological disparity and functional diversity statistics. Statistics are calculated incrementally so dynamics can be understood as a function of species richness. See ?calc_metrics for explanation of each statistic.</p>
 <p>(Note: warnings are turned off in this vignette, caused by attempting to calculate the total variance (V) on factor characters.)</p>
-<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD Several users have requested changes to calc_metrics() to allow simple statistical calculation for the entire sample (instead of doing so incrementally). Starting with version 1.2.1, the argument increm=FALSE allows this functionality. =======</p>
+<p>Several users have requested changes to calc_metrics() to allow simple statistical calculation for the entire sample (instead of doing so incrementally). Starting with version 1.2.1, the argument increm=FALSE allows this functionality.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Using Smax=10 here to illustrate calculation for first 25 species in neutral assemblage</span>
 <span class="kw">options</span>(<span class="dt">warn =</span> <span class="op">-</span><span class="dv">1</span>)
 metrics &lt;-<span class="st"> </span><span class="kw">calc_metrics</span>(<span class="dt">samples=</span>neutral_sample, <span class="dt">Smax=</span><span class="dv">10</span>, <span class="dt">Model=</span><span class="st">&quot;Neutral&quot;</span>)
@@ -262,21 +263,6 @@ metrics</code></pre></div>
 ## 8  0.8128629 0.3138985 0.8224502
 ## 9  0.8668060 0.3138736 0.6489874
 ## 10 0.8152025 0.3229843 0.6164307</code></pre>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>fb78539b6ef6e9b01df7470cc5e3d0445d767e2c</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Calculate statistics for just the entire sample</span>
 <span class="kw">options</span>(<span class="dt">warn =</span> <span class="op">-</span><span class="dv">1</span>)
 metrics &lt;-<span class="st"> </span><span class="kw">calc_metrics</span>(<span class="dt">samples=</span>neutral_sample, <span class="dt">increm=</span><span class="ot">FALSE</span>)
@@ -285,7 +271,7 @@ metrics</code></pre></div>
 ## 50             50 50 0.4408858 0.8888889 NA 0.1936463 0.9961949 0.768834
 ##         FDis qual.FRic
 ## 50 0.3196247 0.2027004</code></pre>
-<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD The more typical use of calc_metrics() is to calculate statistics incrementally (which is the default behavior).</p>
+<p>The more typical use of calc_metrics() is to calculate statistics incrementally (which is the default behavior).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Using Smax=10 here to illustrate calculation for first 10 species in neutral assemblage</span>
 <span class="kw">options</span>(<span class="dt">warn =</span> <span class="op">-</span><span class="dv">1</span>)
 metrics &lt;-<span class="st"> </span><span class="kw">calc_metrics</span>(<span class="dt">samples=</span>neutral_sample, <span class="dt">Smax=</span><span class="dv">10</span>, <span class="dt">Model=</span><span class="st">&quot;Neutral&quot;</span>, <span class="dt">increm=</span><span class="ot">TRUE</span>)
@@ -312,7 +298,7 @@ metrics</code></pre></div>
 ## 8  0.8128629 0.3138985 0.8224502
 ## 9  0.8668060 0.3138736 0.6489874
 ## 10 0.8152025 0.3229843 0.6164307</code></pre>
-<p>======= &gt;&gt;&gt;&gt;&gt;&gt;&gt; fb78539b6ef6e9b01df7470cc5e3d0445d767e2c The functions are written so they can be run ‘in parallel’. Although not run here, the following provides an example of how this can be implemented using lapply(), here building 25 ‘neutral’ samples of 20 species each and then calculating disparity metrics on each.</p>
+<p>The functions are written so they can be run ‘in parallel’. Although not run here, the following provides an example of how this can be implemented using lapply(), here building 25 ‘neutral’ samples of 20 species each and then calculating disparity metrics on each.</p>
 <p>Note the code will take a few seconds to run to completion.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">nreps &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">25</span> <span class="co"># A sequence of the samples to be simulated</span>
 n.samples &lt;-<span class="st"> </span><span class="kw">lapply</span>(<span class="dt">X=</span>nreps, <span class="dt">FUN=</span>neutral, <span class="dt">Sseed=</span><span class="dv">3</span>, <span class="dt">Smax=</span><span class="dv">20</span>, ecospace)
@@ -329,14 +315,9 @@ means &lt;-<span class="st"> </span>n.metrics[[<span class="dv">1</span>]]
 
 <span class="co"># Plot statistics as function of species richness, overlaying mean dynamics</span>
 <span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">4</span>), <span class="dt">mar=</span><span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">1</span>, .<span class="dv">3</span>))
-<span class="kw">attach</span>(all)</code></pre></div>
-<pre><code>## The following objects are masked from all (pos = 4):
-## 
-##     D, FDis, FDiv, FEve, FRic, H, M, Model, Param, qual.FRic, S, V</code></pre>
-<pre><code>## The following objects are masked from all (pos = 5):
-## 
-##     D, FDis, FDiv, FEve, FRic, H, M, Model, Param, qual.FRic, S, V</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(S, H, <span class="dt">type=</span><span class="st">&quot;p&quot;</span>, <span class="dt">cex=</span>.<span class="dv">75</span>, <span class="dt">col=</span><span class="st">&quot;gray&quot;</span>)
+<span class="kw">attach</span>(all)
+
+<span class="kw">plot</span>(S, H, <span class="dt">type=</span><span class="st">&quot;p&quot;</span>, <span class="dt">cex=</span>.<span class="dv">75</span>, <span class="dt">col=</span><span class="st">&quot;gray&quot;</span>)
 <span class="kw">lines</span>(means<span class="op">$</span>S, means<span class="op">$</span>H, <span class="dt">type=</span><span class="st">&quot;l&quot;</span>, <span class="dt">lwd=</span><span class="dv">2</span>)
 <span class="kw">plot</span>(S, D, <span class="dt">type=</span><span class="st">&quot;p&quot;</span>, <span class="dt">cex=</span>.<span class="dv">75</span>, <span class="dt">col=</span><span class="st">&quot;gray&quot;</span>)
 <span class="kw">lines</span>(means<span class="op">$</span>S, means<span class="op">$</span>D, <span class="dt">type=</span><span class="st">&quot;l&quot;</span>, <span class="dt">lwd=</span><span class="dv">2</span>)
