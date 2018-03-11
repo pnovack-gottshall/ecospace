@@ -2,6 +2,12 @@
 \title{ecospace News}
 \encoding{UTF-8}
 
+\section{Changes in version 1.3.2 (2018-03-11)}{
+  \itemize{
+    \item Fix typos in help docs.
+  }
+}
+
 \section{Changes in version 1.3.1 (2018-03-05)}{
   \itemize{
     \item Add warning to create_ecospace when number of character states you provide does not match those in the provided weight.file. (Thanks for Edicson Parra Sanchez for catching the error.)

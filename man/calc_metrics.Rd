@@ -36,7 +36,7 @@ parameter used in simulation. A warning issues if left blank.}
 
 \item{m}{The number of PCoA axes to keep as 'traits' for calculating FRic and
 FDiv in \code{FD::\link[FD]{dbFD}}. Default \code{m=3} is justified below,
-but any integer value grater than 1 is possible. See 'details' for more
+but any integer value greater than 1 is possible. See 'details' for more
 information.}
 
 \item{corr}{Character string specifying the correction method to use in
