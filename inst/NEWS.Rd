@@ -2,9 +2,9 @@
 \title{ecospace News}
 \encoding{UTF-8}
 
-\section{Changes in version 1.3.2 (2018-03-11)}{
+\section{Changes in version 1.4.1 (2018-03-11)}{
   \itemize{
-    \item Fix typos in help docs.
+    \item Change how FD::dbFD is called to allow additional user control via ... [ellipses].
   }
 }
 

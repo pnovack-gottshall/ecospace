@@ -7,7 +7,7 @@ Sample Size.}
 \usage{
 calc_metrics(nreps = 1, samples = NA, Smax = NA, Model = "",
   Param = "", m = 3, corr = "lingoes", method = "Euclidean",
-  increm = TRUE)
+  increm = TRUE, ...)
 }
 \arguments{
 \item{nreps}{Sample number to calculate statistics for. Default is the first
@@ -19,7 +19,9 @@ or related function.}
 \item{samples}{Data frame (if \code{nreps=1}) or list of data frames (if
 \code{nreps=seq()} or \code{nreps!=1}), with each data frame a
 species-by-trait matrix with species as rows and traits as columns. Traits
-can be binary, numeric, ordered numeric, factor, or ordered factor types.}
+can be binary, numeric, ordered numeric, factor, or ordered factor types.
+Each sample is converted to a distance metric (see \code{method} below)
+before calculating statistics.}
 
 \item{Smax}{Maximum number of \code{samples} rows (species) to include in
 calculations, incremented starting with first row. Default (\code{NA}) is to
@@ -49,11 +51,20 @@ values.}
 between species. Default is \code{method='Euclidean'} using
 \code{stats::\link[stats]{dist}}. \code{method='Gower'} or any other value
 uses Gower distance (using \code{FD::\link[FD]{gowdis}}). Presence of factor
-or ordered factor character types forces use of Gower distance.}
+or ordered factor character types forces use of Gower distance, triggering a
+warning to notify user when changed internally.}
 
 \item{increm}{Default \code{increm='TRUE'} calculates statistics incrementally
 as a function of species richness. \code{increm='FALSE'} only calculates a
 single set of statistics for the entire sample.}
+
+\item{...}{Additional parameters for controlling \code{FD::\link[FD]{dbFD}}.
+Common uses include setting \code{calc.FRic=FALSE} or \code{calc.FDiv=FALSE}
+to exclude calculation of FRic and FDiv. Note that the arguments \code{m},
+\code{corr}, and \code{method} above have different defaults than used in
+\code{FD::\link[FD]{dbFD}}, and \code{w.abun=FALSE} and
+\code{messages=FALSE} are also internally changed to different defaults.
+These and others can be controlled here.}
 }
 \value{
 Returns a data frame (if \code{nreps} is a single integer or
@@ -112,8 +123,8 @@ The primary goal of this function is to describe the statistical
  When \code{increm='FALSE'}, the function calculates statistics for the
  entire sample(s) instead of doing so incrementally. In this case, the
  implementation is essentially the same as \code{FD::\link[FD]{dbFD}} with
- default arguments (\code{m, corr}) that reduce common calculation errors,
- plus inclusion of common morphological disparity statistics.
+ default arguments (e.g., \code{m, corr}) that reduce common calculation
+ errors, plus inclusion of common morphological disparity statistics.
 
  \strong{Statistics that measure diversity (unique number of life habits /
  trait combinations within ecospace / functional-trait space):} \describe{
@@ -162,6 +173,13 @@ The primary goal of this function is to describe the statistical
  Anderson (1999), is called when the species-by-species distance matrix
  cannot be represented in a Euclidean space. See the help file for
  \code{FD::\link[FD]{dbFD}} for additional information.
+
+ Note that the ecological disparity statistics are calculated on the raw
+ (unstandardized) distance matrix. The functional diversity statistics are
+ calculated on standardized data using standardizations in
+ \code{FD::\link[FD]{dbFD}}. If all traits are numeric, they by default are
+ standardized to mean 0 and unit variance. If not all traits are numeric,
+ Gower's (1971) standardization by the range is automatically used.
 }
 \note{
 A bug exists within \code{FD::\link[FD]{gowdis}} where nearest-neighbor
@@ -207,10 +225,16 @@ plot(S, FDis, type="l", cex=.5)
 par(op)
 
 # Argument 'increm' switches between incremental and entire-sample calculation
-metrics2 <- calc_metrics(samples=sample, Smax=10, Model="Neutral", Param="NA", increm=FALSE)
+metrics2 <- calc_metrics(samples=sample, Smax=10, Model="Neutral",
+                         Param="NA", increm=FALSE)
 metrics2
 identical(tail(metrics, 1), metrics2) # These are identical
 
+# ... can further control 'FD::dbFD', here turning off calculation of FRic and FDiv
+metrics3 <- calc_metrics(samples=sample, Smax=10, Model="Neutral",
+                         Param="NA", calc.FRic=FALSE, calc.FDiv=FALSE)
+metrics3
+rbind(metrics[10, ], metrics3[10, ])
 
 \dontrun{
 # Can take a few minutes to run to completion
@@ -234,6 +258,9 @@ Ciampaglio, C. N., M. Kemp, and D. W. McShea. 2001. Detecting
 
 Foote, M. 1993. Discordance and concordance between morphological
  and taxonomic diversity. \emph{Paleobiology} 19:185-204.
+
+Gower, J. C. 1971. A general coefficient of similarity and some of
+ its properties. \emph{Biometrics} 27:857-871.
 
 Laliberte, E., and P. Legendre. 2010. A distance-based framework
  for measuring functional diversity from multiple traits. \emph{Ecology}

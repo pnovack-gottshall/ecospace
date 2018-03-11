@@ -18,6 +18,8 @@
 #'  \code{nreps=seq()} or \code{nreps!=1}), with each data frame a
 #'  species-by-trait matrix with species as rows and traits as columns. Traits
 #'  can be binary, numeric, ordered numeric, factor, or ordered factor types.
+#'  Each sample is converted to a distance metric (see \code{method} below)
+#'  before calculating statistics.
 #'@param Smax Maximum number of \code{samples} rows (species) to include in
 #'  calculations, incremented starting with first row. Default (\code{NA}) is to
 #'  increment to the maximum number of \code{samples} rows (calculated
@@ -41,10 +43,18 @@
 #'  between species. Default is \code{method='Euclidean'} using
 #'  \code{stats::\link[stats]{dist}}. \code{method='Gower'} or any other value
 #'  uses Gower distance (using \code{FD::\link[FD]{gowdis}}). Presence of factor
-#'  or ordered factor character types forces use of Gower distance.
+#'  or ordered factor character types forces use of Gower distance, triggering a
+#'  warning to notify user when changed internally.
 #'@param increm Default \code{increm='TRUE'} calculates statistics incrementally
 #'  as a function of species richness. \code{increm='FALSE'} only calculates a
 #'  single set of statistics for the entire sample.
+#'@param ... Additional parameters for controlling \code{FD::\link[FD]{dbFD}}.
+#'  Common uses include setting \code{calc.FRic=FALSE} or \code{calc.FDiv=FALSE}
+#'  to exclude calculation of FRic and FDiv. Note that the arguments \code{m},
+#'  \code{corr}, and \code{method} above have different defaults than used in
+#'  \code{FD::\link[FD]{dbFD}}, and \code{w.abun=FALSE} and
+#'  \code{messages=FALSE} are also internally changed to different defaults.
+#'  These and others can be controlled here.
 #'
 #'@details The primary goal of this function is to describe the statistical
 #'  dynamics of common ecological disparity (functional diversity) metrics as a
@@ -78,8 +88,8 @@
 #'  When \code{increm='FALSE'}, the function calculates statistics for the
 #'  entire sample(s) instead of doing so incrementally. In this case, the
 #'  implementation is essentially the same as \code{FD::\link[FD]{dbFD}} with
-#'  default arguments (\code{m, corr}) that reduce common calculation errors,
-#'  plus inclusion of common morphological disparity statistics.
+#'  default arguments (e.g., \code{m, corr}) that reduce common calculation
+#'  errors, plus inclusion of common morphological disparity statistics.
 #'
 #'  \strong{Statistics that measure diversity (unique number of life habits /
 #'  trait combinations within ecospace / functional-trait space):} \describe{
@@ -129,6 +139,13 @@
 #'  cannot be represented in a Euclidean space. See the help file for
 #'  \code{FD::\link[FD]{dbFD}} for additional information.
 #'
+#'  Note that the ecological disparity statistics are calculated on the raw
+#'  (unstandardized) distance matrix. The functional diversity statistics are
+#'  calculated on standardized data using standardizations in
+#'  \code{FD::\link[FD]{dbFD}}. If all traits are numeric, they by default are
+#'  standardized to mean 0 and unit variance. If not all traits are numeric,
+#'  Gower's (1971) standardization by the range is automatically used.
+#'
 #'@return Returns a data frame (if \code{nreps} is a single integer or
 #'  \code{samples} is a single data frame) or a list of data frames. Each
 #'  returned data frame has \code{Smax} rows corresponding to incremental
@@ -174,6 +191,8 @@
 #'  27(4):695-715.
 #'@references Foote, M. 1993. Discordance and concordance between morphological
 #'  and taxonomic diversity. \emph{Paleobiology} 19:185-204.
+#'@references Gower, J. C. 1971. A general coefficient of similarity and some of
+#'  its properties. \emph{Biometrics} 27:857-871.
 #'@references Laliberte, E., and P. Legendre. 2010. A distance-based framework
 #'  for measuring functional diversity from multiple traits. \emph{Ecology}
 #'  91(1):299-305.
@@ -248,10 +267,16 @@
 #' par(op)
 #'
 #' # Argument 'increm' switches between incremental and entire-sample calculation
-#' metrics2 <- calc_metrics(samples=sample, Smax=10, Model="Neutral", Param="NA", increm=FALSE)
+#' metrics2 <- calc_metrics(samples=sample, Smax=10, Model="Neutral",
+#'                          Param="NA", increm=FALSE)
 #' metrics2
 #' identical(tail(metrics, 1), metrics2) # These are identical
 #'
+#' # ... can further control 'FD::dbFD', here turning off calculation of FRic and FDiv
+#' metrics3 <- calc_metrics(samples=sample, Smax=10, Model="Neutral",
+#'                          Param="NA", calc.FRic=FALSE, calc.FDiv=FALSE)
+#' metrics3
+#' rbind(metrics[10, ], metrics3[10, ])
 #'
 #' \dontrun{
 #' # Can take a few minutes to run to completion
@@ -264,8 +289,8 @@
 #' }
 #'@export
 calc_metrics <-
-  function(nreps = 1, samples = NA, Smax = NA, Model = "", Param = "",
-           m = 3, corr = "lingoes", method = "Euclidean", increm = TRUE) {
+  function(nreps = 1, samples = NA, Smax = NA, Model = "", Param = "", m = 3,
+           corr = "lingoes", method = "Euclidean", increm = TRUE, ...) {
     if (is.logical(samples))
       stop("you must provide a list of samples to calculate\n")
     if (is.data.frame(samples)) {
@@ -274,18 +299,18 @@ calc_metrics <-
       sample <- samples[[nreps]]
     }
     if (!is.data.frame(sample))
-      stop("samples is not a data frame or list of data frames\n.")
+      stop("samples is not a data frame or list of data frames.")
     if (Model == "")
-      warning("you did not specify a model name. Model will be left empty.\n")
+      warning("you did not specify a model name. Model will be left empty.")
     if (Param == "")
-      warning("you did not specify a parameter value. Param will be left empty.\n")
+      warning("you did not specify a parameter value. Param will be left empty.")
     if (!is.numeric(Smax)) {
       ns <- nrow(sample)
     } else {
       ns <- Smax
       if (ns < Smax) {
         warning("Smax specified is greater than sample size. Calculation
-              stopped prematurely when reached complete sample size.\n")
+              stopped prematurely when reached complete sample size.")
       }
     }
     if (increm) {
@@ -295,11 +320,28 @@ calc_metrics <-
     }
     if (method != "Euclidean" |
         any(sapply(sample, data.class) == "factor") |
-        any(sapply(sample, data.class) == "ordered"))
+        any(sapply(sample, data.class) == "ordered")) {
       method <- "Gower"
+      warning("'sample' converted to distance matrix using Gower distance.")
+    }
     odir <-
       setwd(tempdir())     # Specify the pre-built (and CPU-process unique) temp directory for storage of vert.txt temp files for convex hull calculations
     on.exit(setwd(odir))
+    # Modify arguments used in 'FD::dbFD':
+    dots <- list(...)
+    dot.names <- names(dots)
+    args <- formals(dbFD)
+    arg.names <- names(args)
+    mod.arg <- match(dot.names, arg.names)
+    if (any(is.na(mod.arg)))
+      stop("'...' specifies arguments that are not arguments to 'FD::dbFD'")
+    args$m <- m
+    args$w.abun <- FALSE
+    args$messages <- FALSE
+    args$corr <- corr
+    for (a in 1:length(mod.arg)) {
+      args[mod.arg[a]] <- dots[a]
+    }
     sam.out <-
       data.frame(Model = Model, Param = Param, S = numeric(ns),
         H = numeric(ns), D = numeric(ns), M = numeric(ns), V = numeric(ns),
@@ -322,18 +364,18 @@ calc_metrics <-
       sam.out$V[s] <- sqrt(sum(apply(sam, 2, var, na.rm = TRUE)))
       if (s <= m | H <= m)
         next
-      FD <-
-        FD::dbFD(dist, m = m, w.abun = FALSE, messages = FALSE, corr = corr)
+      args$x <- dist
+      FD <- do.call("dbFD", args = args)
       sam.out$FDis[s] <- FD$FDis
       sam.out$FEve[s] <- FD$FEve
+      sam.out$FRic[s] <- NA
+      sam.out$qual.FRic[s] <- NA
+      sam.out$FDiv[s] <- NA
       if (!is.null(FD$FRic)) {
         sam.out$FRic[s] <- FD$FRic
         sam.out$qual.FRic[s] <- FD$qual.FRic
-        if (!is.null(FD$FDiv)) {
-          sam.out$FDiv[s] <- FD$FDiv
-        } else {
-          sam.out$FDiv[s] <- NA
-        }
+      }
+      if (!is.null(FD$FDiv)) {
         sam.out$FDiv[s] <- FD$FDiv
       }
     }
