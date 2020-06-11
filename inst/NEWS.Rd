@@ -2,6 +2,12 @@
 \title{ecospace News}
 \encoding{UTF-8}
 
+\section{Changes in version 1.4.2 (2020-06-20)}{
+  \itemize{
+    \item Fix typo in create_ecospace help doc for arg 'char.type'.
+  }
+}
+
 \section{Changes in version 1.4.1 (2018-03-11)}{
   \itemize{
     \item Change how FD::dbFD is called to allow additional user control via ... [ellipses].

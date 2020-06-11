@@ -9,7 +9,7 @@
 #'   'Details' for explanation. Allowed types include: \itemize{ \item
 #'   \code{numeric} for numeric and binary characters, \item \code{ord.num} for
 #'   ordered numeric characters, \item \code{ord.fac} for ordered factor
-#'   characters, or \item \code{ord.factor} for factor characters. }
+#'   characters, or \item \code{factor} for factor characters. }
 #' @param char.names Optional character string listing character names.
 #' @param state.names Optional character string listing character state names.
 #' @param constraint Positive integer specifying the maximum number of "multiple
@@ -52,7 +52,7 @@
 #'   characters (factors with a specified order). An example is mobility:
 #'   habitual > intermittent > facultative > passive > sedentary. (If wish to
 #'   specify relative distances between these ordered factors, it is best to use
-#'   an ordered numeric character type instead). \item \code{ord.factor} for
+#'   an ordered numeric character type instead). \item \code{factor} for
 #'   discrete, unordered factors (e.g., diet can have states of autotrophic,
 #'   carnivorous, herbivorous, or microbivorous).}
 #'
