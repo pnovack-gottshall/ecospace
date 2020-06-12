@@ -8,7 +8,7 @@
 #' @name KWTraits
 #' @rdname KWTraits
 #'
-#' @details Binary traits are coded with 0=absent and 1=present. Five ordered
+#' @details Binary traits are coded with 0 = absent and 1 = present. Five ordered
 #'   numeric traits (body volume, mobility, distance from seafloor
 #'   [stratification]) were rescaled to range from 0 to 1 with discrete bins at
 #'   equally spaced intermediate values.

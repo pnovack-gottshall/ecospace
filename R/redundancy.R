@@ -5,7 +5,7 @@
 #'
 #' @param nreps Vector of integers (such as a sequence) specifying sample number
 #'   produced. Only used when function is applied within \code{lapply} or
-#'   related function. Default \code{nreps=1} or any other integer produces a
+#'   related function. Default \code{nreps = 1} or any other integer produces a
 #'   single sample.
 #' @param Sseed Integer giving number of species (or other taxa) to use at start
 #'   of simulation.
@@ -15,7 +15,7 @@
 #'   simulation.
 #' @param strength Strength parameter controlling probability that redundancy
 #'   rule is followed during simulation. Values must range between
-#'   \code{strength=1} (default, rules always implemented) and \code{strength=0}
+#'   \code{strength = 1} (default, rules always implemented) and \code{strength = 0}
 #'   (rules never implemented).
 #'
 #' @details Simulations are implemented as Monte Carlo processes in which
@@ -33,8 +33,8 @@
 #'   create a new species using that species' characters as a template. A
 #'   character is modified (using a random multinomial draw from the ecospace
 #'   framework) according to the \code{strength} parameter. Default
-#'   \code{strength=1} always implements the redundancy rule, whereas
-#'   \code{strength=0} never implements it (essentially making the simulation
+#'   \code{strength = 1} always implements the redundancy rule, whereas
+#'   \code{strength = 0} never implements it (essentially making the simulation
 #'   follow the \code{\link{neutral}} rule.) Because new character states can be
 #'   any allowed by the ecospace framework, there is the possibility of
 #'   obtaining redundancy greater than that specified by a strength parameter
@@ -76,13 +76,13 @@
 #' # Create an ecospace framework with 15 3-state factor characters
 #' # Can also accept following character types: "numeric", "ord.num", "ord.fac"
 #' nchar <- 15
-#' ecospace <- create_ecospace(nchar=nchar, char.state=rep(3, nchar),
-#'   char.type=rep("factor", nchar))
+#' ecospace <- create_ecospace(nchar = nchar, char.state = rep(3, nchar),
+#'   char.type = rep("factor", nchar))
 #'
-#' # Single (default) sample produced by redundancy function (with strength=1):
+#' # Single (default) sample produced by redundancy function (with strength = 1):
 #' Sseed <- 5
 #' Smax <- 50
-#' x <- redundancy(Sseed=Sseed, Smax=Smax, ecospace=ecospace)
+#' x <- redundancy(Sseed = Sseed, Smax = Smax, ecospace = ecospace)
 #' head(x, 10)
 #'
 #' # Plot results, showing order of assembly
@@ -92,27 +92,27 @@
 #' types <- sapply(seq, function(seq) ecospace[[seq]]$type)
 #' if(any(types == "ord.fac" | types == "factor")) pc <- prcomp(FD::gowdis(x)) else
 #'   pc <- prcomp(x)
-#' plot(pc$x, type="n", main=paste("Redundancy model,\n", Smax, "species"))
-#' text(pc$x[,1], pc$x[,2], labels=seq(Smax), col=c(rep("red", Sseed), rep("black", 5),
-#'   rep("slategray", (Smax - Sseed - 5))), pch=c(rep(19, Sseed), rep(21, (Smax - Sseed))),
-#'   cex=.8)
+#' plot(pc$x, type = "n", main = paste("Redundancy model,\n", Smax, "species"))
+#' text(pc$x[,1], pc$x[,2], labels = seq(Smax), col = c(rep("red", Sseed), rep("black", 5),
+#'   rep("slategray", (Smax - Sseed - 5))), pch = c(rep(19, Sseed), rep(21, (Smax - Sseed))),
+#'   cex = .8)
 #'
 #' # Change strength parameter so new species are 95% identical:
-#' x <- redundancy(Sseed=Sseed, Smax=Smax, ecospace=ecospace, strength=0.95)
+#' x <- redundancy(Sseed = Sseed, Smax = Smax, ecospace = ecospace, strength = 0.95)
 #' if(any(types == "ord.fac" | types == "factor")) pc <- prcomp(FD::gowdis(x)) else
 #'   pc <- prcomp(x)
-#' plot(pc$x, type="n", main=paste("Redundancy model,\n", Smax, "species"))
-#' text(pc$x[,1], pc$x[,2], labels=seq(Smax), col=c(rep("red", Sseed), rep("black", 5),
-#'   rep("slategray", (Smax - Sseed - 5))), pch=c(rep(19, Sseed), rep(21, (Smax - Sseed))),
-#'   cex=.8)
+#' plot(pc$x, type = "n", main = paste("Redundancy model,\n", Smax, "species"))
+#' text(pc$x[,1], pc$x[,2], labels = seq(Smax), col = c(rep("red", Sseed), rep("black", 5),
+#'   rep("slategray", (Smax - Sseed - 5))), pch = c(rep(19, Sseed), rep(21, (Smax - Sseed))),
+#'   cex = .8)
 #'
 #' # Create 5 samples using multiple nreps and lapply (can be slow)
 #' nreps <- 1:5
-#' samples <- lapply(X=nreps, FUN=redundancy, Sseed=5, Smax=50, ecospace)
+#' samples <- lapply(X = nreps, FUN = redundancy, Sseed = 5, Smax = 50, ecospace)
 #' str(samples)
 #'
 #' @export
-redundancy <- function(nreps=1, Sseed, Smax, ecospace, strength=1) {
+redundancy <- function(nreps = 1, Sseed, Smax, ecospace, strength = 1) {
   if (strength < 0 | strength > 1)
     stop("strength must have a value between 0 and 1\n")
   nchar <- length(ecospace) - 1

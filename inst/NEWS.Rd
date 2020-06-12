@@ -2,9 +2,10 @@
 \title{ecospace News}
 \encoding{UTF-8}
 
-\section{Changes in version 1.4.2 (2020-06-20)}{
+\section{Changes in version 1.4.2 (2020-06-11)}{
   \itemize{
     \item Fix typo in create_ecospace help doc for arg 'char.type'.
+    \item Minor text changes.
   }
 }
 

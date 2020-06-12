@@ -9,7 +9,7 @@ unique2(x, length = 1, ...)
 \arguments{
 \item{x}{a vector or a data frame or an array or NULL.}
 
-\item{length}{number of times (default=1) to repeat the dimensionally shorter
+\item{length}{number of times (default = 1) to repeat the dimensionally shorter
 state.}
 
 \item{...}{arguments for particular methods.}

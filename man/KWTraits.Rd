@@ -4,7 +4,8 @@
 \name{KWTraits}
 \alias{KWTraits}
 \title{Species-by-Trait Matrix for Late Ordovician Marine Fossils.}
-\format{A data frame with 237 rows (taxa) and 40 columns (3 taxonomic
+\format{
+A data frame with 237 rows (taxa) and 40 columns (3 taxonomic
   identifiers and 37 functional traits): \describe{\item{Class}{Taxonomic
   class(character)} \item{Genus}{Taxonomic genus (character)}
   \item{sp.}{Taxonomic species (character)} \item{SEXL}{Sexual reproduction
@@ -48,7 +49,8 @@
   habit} \item{AUTO}{Autotrophic diet} \item{MICR}{Microbivorous (bacteria,
   protists, algae) diet} \item{CARN}{Carnivorous diet} \item{INCP}{Food has
   incorporeal physical condition} \item{PART}{Food consumed as particulate
-  matter} \item{BULK}{Food consumed as bulk matter}}}
+  matter} \item{BULK}{Food consumed as bulk matter}}
+}
 \source{
 Novack-Gottshall, P.M. 2016b. General models of ecological
   diversification. II. Simulations and empirical applications.
@@ -64,7 +66,7 @@ from Ohio, Indiana, and Kentucky (U.S.A.). The faunal list was compiled from
 the Paleobiololgy Database (\url{paleobiodb.org/}).
 }
 \details{
-Binary traits are coded with 0=absent and 1=present. Five ordered
+Binary traits are coded with 0 = absent and 1 = present. Five ordered
   numeric traits (body volume, mobility, distance from seafloor
   [stratification]) were rescaled to range from 0 to 1 with discrete bins at
   equally spaced intermediate values.

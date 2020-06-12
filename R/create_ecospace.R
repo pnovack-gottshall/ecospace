@@ -57,15 +57,15 @@
 #'   carnivorous, herbivorous, or microbivorous).}
 #'
 #'   Binary characters can be treated individually (e.g., states of
-#'   present=1/absent=0) or can be treated as multiple binary character states.
+#'   present = 1/absent = 0) or can be treated as multiple binary character states.
 #'   For example, the character 'reproduction' could be treated as including two
 #'   states [sexual, asexual] with exclusively sexual habits coded as [0,1],
 #'   exclusively asexual as [1,0], and hermaphrodites as [1,1]. The
 #'   \code{constraint} argument allows additional control of such combinations.
-#'   Setting \code{constraint=2} only allows a maximum of "two-presence"
+#'   Setting \code{constraint = 2} only allows a maximum of "two-presence"
 #'   combinations (e.g., [1,0,0], [0,1,0], [0,0,1], [1,1,0], [1,0,1], and
 #'   [0,1,1]) as state combinations, but excludes [1,1,1]; setting
-#'   \code{constraint=1} only allows the first three of these combinations; the
+#'   \code{constraint = 1} only allows the first three of these combinations; the
 #'   default behavior (\code{Inf}) allows all of these combinations. In all
 #'   cases, the nonsensical "all-absence" state combination [0,0,0] is
 #'   disallowed.
@@ -114,7 +114,7 @@
 #'   also excludes taxonomic identifiers (class, genus, species).}}
 #'
 #' @note If you have trouble matching the characters with \code{char.state} and
-#'   \code{char.type,}, see \code{data.frame} in first example for easy way to
+#'   \code{char.type}, see \code{data.frame} in first example for easy way to
 #'   trouble-shoot. If you have trouble supplying correct length of
 #'   \code{char.name, state.name} and \code{weight.file}, consider producing an
 #'   ecospace framework with defaults first, then using these to supply custom
@@ -163,8 +163,8 @@
 #' char.type <- replace(char.type, char.state == 5, "ord.fac")
 #' char.type <- replace(char.type, char.state > 5, "factor")
 #' # Good practice to confirm everything matches expectations:
-#' data.frame(char=seq(nchar), char.state, char.type)
-#' ecospace <- create_ecospace(nchar, char.state, char.type, constraint=Inf)
+#' data.frame(char = seq(nchar), char.state, char.type)
+#' ecospace <- create_ecospace(nchar, char.state, char.type, constraint = Inf)
 #' ecospace
 #'
 #' # How many life habits in this ecospace are theoretically possible?
@@ -173,18 +173,18 @@
 #' # ~12 million
 #'
 #' # Observe effect of constraint for binary characters
-#' create_ecospace(1, 4, "numeric", constraint=Inf)[[1]]$char.space
-#' create_ecospace(1, 4, "numeric", constraint=2)[[1]]$char.space
-#' create_ecospace(1, 4, "numeric", constraint=1)[[1]]$char.space
-#' try(create_ecospace(1, 4, "numeric", constraint=1.5)[[1]]$char.space) # ERROR!
-#' try(create_ecospace(1, 4, "numeric", constraint=0)[[1]]$char.space) # ERROR!
+#' create_ecospace(1, 4, "numeric", constraint = Inf)[[1]]$char.space
+#' create_ecospace(1, 4, "numeric", constraint = 2)[[1]]$char.space
+#' create_ecospace(1, 4, "numeric", constraint = 1)[[1]]$char.space
+#' try(create_ecospace(1, 4, "numeric", constraint = 1.5)[[1]]$char.space) # ERROR!
+#' try(create_ecospace(1, 4, "numeric", constraint = 0)[[1]]$char.space) # ERROR!
 #'
 #' # Using custom-weighting for traits (singletons weighted twice as frequent
 #' #   as other state combinations)
 #' weight.file <- c(rep(2, 3), rep(1, 3), 2, 2, 1, rep(1, 4), rep(2, 3), rep(1, 3),
 #' rep(1, 14), 2, 2, 1, rep(1, 4), rep(2, 3), rep(1, 3), rep(1, 5))
-#' create_ecospace(nchar, char.state, char.type, constraint=2,
-#'   weight.file=weight.file)
+#' create_ecospace(nchar, char.state, char.type, constraint = 2,
+#'   weight.file = weight.file)
 #'
 #' # Bambach's (1983, 1985) classic ecospace framework
 #' # 3 characters, all factors with variable states
@@ -240,21 +240,22 @@
 #'   "AREL", "IREL", "FAAB", "FIAB", "FAST", "FARL", "FIRL", "FRST", "AMBT", "FILT",
 #'   "ATTF", "MASS", "RAPT", "AUTO", "MICR", "CARN", "INCP", "PART", "BULK")
 #' ecospace <- create_ecospace(nchar, char.state, char.type, char.names, state.names,
-#'   constraint=2, weight.file=KWTraits)
+#'   constraint = 2, weight.file = KWTraits)
 #' ecospace
 #' seq <- seq(nchar)
 #' prod(sapply(seq, function(seq) length(ecospace[[seq]]$allowed.combos)))
 #' # ~57 billion life habits
 #'
 #' ecospace <- create_ecospace(nchar, char.state, char.type, char.names, state.names,
-#'   constraint=Inf)
+#'   constraint = Inf)
 #' ecospace
 #' seq <- seq(nchar)
 #' prod(sapply(seq, function(seq) length(ecospace[[seq]]$allowed.combos)))
 #' # ~3.6 trillion life habits
 #'
 #' @export
-create_ecospace <- function(nchar, char.state, char.type, char.names=NA, state.names=NA, constraint=Inf, weight.file=NA) {
+create_ecospace <- function(nchar, char.state, char.type, char.names = NA,
+                            state.names = NA, constraint = Inf, weight.file = NA) {
   if (is.finite(constraint) &
       (constraint < 1 |
        (abs(constraint - round(constraint)) > .Machine$double.eps)))

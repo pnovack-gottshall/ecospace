@@ -6,7 +6,7 @@
 #' filling of matrix when called within \code{apply}.
 #'
 #' @param x a vector or a data frame or an array or NULL.
-#' @param length number of times (default=1) to repeat the dimensionally shorter
+#' @param length number of times (default = 1) to repeat the dimensionally shorter
 #'   state.
 #' @param ... arguments for particular methods.
 #'
@@ -24,7 +24,7 @@
 #' @seealso \code{\link[base]{unique}}
 #'
 #' @export
-unique2 <- function(x, length=1, ...) {
+unique2 <- function(x, length = 1, ...) {
   out <- unique(x, ...)
   if (length(out) == 1)
     out <- rep(out, length)

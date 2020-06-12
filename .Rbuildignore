@@ -6,4 +6,5 @@
 ^README\.md$
 ^Submitting to CRAN\.txt$
 ^NEWS\.md$
-
+^doc$
+^Meta$
