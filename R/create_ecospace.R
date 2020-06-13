@@ -33,7 +33,7 @@
 #'   characters describe diet and foraging habit, mobility, microhabitat, among
 #'   others, with the individual diets, modes of locomotions, and microhabitats
 #'   as possible character states.  When any combination of character states is
-#'   allowed, the framework serves as a theoretical ecospace; actually occuring
+#'   allowed, the framework serves as a theoretical ecospace; actually occurring
 #'   life-habit combinations circumscribe the realized ecospace.
 #'
 #'   Arguments \code{nchar, char.state, char.type} specify the number and types
@@ -95,7 +95,7 @@
 #'   character, plus a final list component recording constraints used in
 #'   producing allowable character states.
 #'
-#'   Each character conponent has the following list components:\describe{
+#'   Each character component has the following list components:\describe{
 #'   \item{\code{char}}{character name.}\item{\code{type}}{character type.}
 #'   \item{\code{char.space}}{data frame listing each allowable state
 #'   combination in each row, the calculated proportional weight (\code{pro}),

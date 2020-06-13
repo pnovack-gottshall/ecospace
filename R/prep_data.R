@@ -12,7 +12,7 @@
 #'   adding first placeholder column allows \code{cbind} to work properly with
 #'   data frame later, but requires deleting that placeholder at end.
 #'
-#' @return Returns an emptry data frame with pre-defined number of species and
+#' @return Returns an empty data frame with pre-defined number of species and
 #'   functional traits of proper class type.
 #'
 #' @seealso \code{\link{create_ecospace}} for how to create an ecospace

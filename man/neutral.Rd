@@ -51,7 +51,7 @@ Simulations are implemented as Monte Carlo processes in which
   (using whatever constraints and structure was provided by the ecospace
   framework in \code{create_ecospace}). Thus, if relative weighting was
   provided to character states (functional traits), simulated species will
-  mimic these weights, on average. If state cominations were constrained (by
+  mimic these weights, on average. If state combinations were constrained (by
   setting \code{constraint} in \code{create_ecospace}), then unallowed state
   combinations will not be allowed in simulated species.
 
@@ -76,7 +76,7 @@ Simulations are implemented as Monte Carlo processes in which
 }
 \note{
 The function has been written to allow usage (using
-  \code{\link{lapply}} or some other list-apply function) in 'embarrasingly
+  \code{\link{lapply}} or some other list-apply function) in 'embarrassingly
   parallel' implementations in a high-performance computing environment.
 }
 \examples{

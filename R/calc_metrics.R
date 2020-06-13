@@ -123,9 +123,9 @@
 #'  \code{m = 3}. Because their calculation requires more species than traits
 #'  (here the \code{m = 3} PCoA axes), the four functional diversity statistics
 #'  are only calculated when a calculated sample contains a minimum of \code{m}
-#'  species (S) or unique life habtis (H). \code{qual.FRic} is appended to the
+#'  species (S) or unique life habits (H). \code{qual.FRic} is appended to the
 #'  output to record the proportion ('quality') of PCoA space retained by this
-#'  loss of dimenstionality. Although including more PCoA axes allows greater
+#'  loss of dimensionality. Although including more PCoA axes allows greater
 #'  statistical power (Villeger et al. 2011, Maire et al. 2015), the use of
 #'  \code{m = 3} here is computationally manageable, ecologically meaningful, and
 #'  allows standardized measurement of statistical dynamics across the wide
@@ -172,7 +172,7 @@
 #'  If calculating statistics for more than several hundred samples, it is
 #'  recommended to use a parallel-computing environment. The function has been
 #'  written to allow usage (using \code{\link{lapply}} or some other list-apply
-#'  function) in 'embarrasingly parallel' implementations in such HPC
+#'  function) in 'embarrassingly parallel' implementations in such HPC
 #'  environments. Most importantly, overwriting errors during calculation of
 #'  convex hull volume in FRic are avoided by creating CPU-specific temporarily
 #'  stored vertices files.

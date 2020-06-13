@@ -75,7 +75,7 @@ Simulations are implemented as Monte Carlo processes in which
   identify the position of each additional species. \describe{
   \item{\code{strict} (minimum distant neighbor) rule}{Identify the maximum
   distances between all pairs of species (the most-distant neighbors); the
-  space to be partitionined is the minimum of these distances. This
+  space to be partitioned is the minimum of these distances. This
   implementation progressively fills in the largest parts of the ecospace
   that are least occupied between neighboring species, and eventually
   partitions the ecospace in straight-line gradients between seed species.}
@@ -89,7 +89,7 @@ Simulations are implemented as Monte Carlo processes in which
   criteria, one of these pairs is chosen at random. Ordered, multistate
   character partitioning (such as ordered factors or order numeric character
   types) can include any state equal to or between the observed states of
-  existing species. The probability of followng the partitioning rule is
+  existing species. The probability of following the partitioning rule is
   determined by the \code{strength} parameter. Default \code{strength = 1}
   always implements the rule, whereas \code{strength = 0} never implements it
   (essentially making the simulation follow the \code{\link{neutral}} rule.)
@@ -128,7 +128,7 @@ A bug exists within \code{FD::\link[FD]{gowdis}} where nearest-neighbor
   instead.
 
   The function has been written to allow usage (using \code{\link{lapply}} or
-  some other list-apply function) in 'embarrasingly parallel' implementations
+  some other list-apply function) in 'embarrassingly parallel' implementations
   in a high-performance computing environment.
 }
 \examples{

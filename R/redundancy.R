@@ -55,7 +55,7 @@
 #'   ecospace framework.
 #'
 #' @note The function has been written to allow usage (using
-#'   \code{\link{lapply}} or some other list-apply function) in 'embarrasingly
+#'   \code{\link{lapply}} or some other list-apply function) in 'embarrassingly
 #'   parallel' implementations in a high-performance computing environment.
 #'
 #' @author Phil Novack-Gottshall \email{pnovack-gottshall@@ben.edu}

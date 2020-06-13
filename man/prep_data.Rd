@@ -14,7 +14,7 @@ prep_data(ecospace, Smax)
 simulation.}
 }
 \value{
-Returns an emptry data frame with pre-defined number of species and
+Returns an empty data frame with pre-defined number of species and
   functional traits of proper class type.
 }
 \description{

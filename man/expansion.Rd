@@ -97,7 +97,7 @@ A bug exists within \code{FD::\link[FD]{gowdis}} where nearest-neighbor
   instead.
 
   The function has been written to allow usage (using \code{\link{lapply}} or
-  some other list-apply function) in 'embarrasingly parallel' implementations
+  some other list-apply function) in 'embarrassingly parallel' implementations
   in a high-performance computing environment.
 }
 \examples{

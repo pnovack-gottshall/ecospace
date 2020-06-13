@@ -144,7 +144,7 @@ exp_sample <- expansion(Sseed = Sseed, Smax = Smax,
                         ecospace = ecospace)
 ```
 
-Plot the assemblage, showing order of assembly. Notice how later species consistently expand the ecospace, exploring previously unexplored parts of the exospace.
+Plot the assemblage, showing order of assembly. Notice how later species consistently expand the ecospace, exploring previously unexplored parts of the ecospace.
 ```{r, fig.width = 5, fig.height = 5}
 pc.e <- prcomp(FD::gowdis(exp_sample))
 plot(pc.e$x, type = "n", 
