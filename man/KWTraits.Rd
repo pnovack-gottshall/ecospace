@@ -63,23 +63,23 @@ KWTraits
 Sample data set of life habit codings (functional traits) for fossil taxa
 from the Late Ordovician (Type Cincinnatian) Kope and Waynesville Formations
 from Ohio, Indiana, and Kentucky (U.S.A.). The faunal list was compiled from
-the Paleobiololgy Database (\url{paleobiodb.org/}).
+the \href{https://paleobiodb.org/}{Paleobiology Database}.
 }
 \details{
-Binary traits are coded with 0 = absent and 1 = present. Five ordered
-  numeric traits (body volume, mobility, distance from seafloor
+Binary traits are coded with 0 = absent and 1 = present. Five
+  ordered numeric traits (body volume, mobility, distance from seafloor
   [stratification]) were rescaled to range from 0 to 1 with discrete bins at
   equally spaced intermediate values.
 
   See Novack-Gottshall (2007: especially online Supplementary Appendix A at
-  \url{www.ben.edu/faculty/pnovack-gottshall/2007_Novack-Gottshall_Ecospace.pdf})
-   for definition each functional trait, justifications, explanations, and
-  examples. Novack-Gottshall (2007: Supplementary Appendix B; 2016:
-  Supplementary Appendix A) provides examples of how traits were coded using
-  inferences derived from functional morphology, body size, ichnology,
-  \emph{in situ} preservation, biotic associations recording direct
-  interactions, and interpretation of geographic and depositional environment
-  patterns.
+  \href{https://www.researchgate.net/publication/237375733_Using_a_theoretical_ecospace_to_quantify_the_ecological_diversity_of_Paleozoic_and_modern_marine_biotas}{for
+  reprint}) for definition each functional trait, justifications,
+  explanations, and examples. Novack-Gottshall (2007: Supplementary Appendix
+  B; 2016: Supplementary Appendix A) provides examples of how traits were
+  coded using inferences derived from functional morphology, body size,
+  ichnology, \emph{in situ} preservation, biotic associations recording
+  direct interactions, and interpretation of geographic and depositional
+  environment patterns.
 
   Indeterminate taxa (e.g., trepostome bryozoan indet. or
   \emph{Platystrophia} sp.) that occurred within individual samples within
